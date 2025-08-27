@@ -1,0 +1,35 @@
+{
+  "psp_safe_mode": true,
+  "show_truth_bomb_public": false,
+  "evergreen_mode": false,
+  "bot_username": "guardscorebot",
+  "default_country": "US", 
+  "default_vertical": "general",
+  "countdown_deadline": "2025-10-01T00:00:00Z",
+  "sticky_mobile_delay_ms": 6000,
+  "calculator_completion_target": 0.60,
+  "calc_to_bot_target": 0.40,
+  "enable_exit_intent": false,
+  "analytics": {
+    "gtm_id": "GTM-XXXXXXX",
+    "events": {
+      "vamp_calc_view": true,
+      "vamp_calc_complete": true,
+      "to_bot_click": true,
+      "mg_click_cta": true,
+      "mg_calc_complete": true,
+      "mg_bot_start": true
+    }
+  },
+  "brand_guardrails": {
+    "use_neutral_language": true,
+    "show_ranges_not_specifics": true,
+    "require_disclaimers": true,
+    "keep_emojis_minimal": true
+  },
+  "hero_variants": {
+    "current": "vamp_enforcement",
+    "evergreen": "guardscore_copilot",
+    "emergency": "vamp_crisis"
+  }
+}

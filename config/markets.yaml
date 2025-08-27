@@ -1,0 +1,247 @@
+version: "4.0"
+notes: |
+  Market-specific scoring rules, thresholds, and provider multipliers.
+  All thresholds configurable without touching model code.
+
+markets:
+  US_CARDS:
+    name: "US Cards"
+    program: "VAMP"
+    currency: "USD"
+    thresholds:
+      # VAMP Program Thresholds
+      dispute_rate:
+        green: 0.0050      # ≤0.50% - Safe zone
+        amber: 0.0065      # 0.51-0.65% - Early warning
+        red: 0.0100        # ≥1.00% - VAMP breach risk
+      chargeback_rate:
+        green: 0.0050      # ≤0.50% - Safe zone  
+        amber: 0.0065      # 0.51-0.65% - VAMP watch
+        red: 0.0100        # ≥1.00% - High VAMP risk
+      auth_rate:
+        green: 0.9500      # ≥95% - Excellent
+        amber: 0.9200      # 92-95% - Good
+        red: 0.9000        # <90% - Poor auth performance
+    visa_requirements:
+      ready: 80           # ≥80 GuardScore = Ready ✅
+      pending: 50         # 50-79 = Pending ⚠️
+      blocked: 0          # <50 = Blocked ❌
+    alerts:
+      vamp_early_warn:
+        threshold: 0.0065
+        window_days: 7
+        message: "Approaching VAMP early warning threshold"
+        action: "Review dispute SOP and 3-DS settings"
+      vamp_breach_risk:
+        threshold: 0.0090
+        window_days: 3  
+        message: "High VAMP breach risk detected"
+        action: "Immediate review required - contact compliance"
+    multipliers:
+      profile_weight: 1.0
+      data_verified_boost: 1.20
+      comprehensive_sop_boost: 1.15
+      prior_suspension_penalty: 0.75
+
+  BR_PIX:
+    name: "Brazil PIX"
+    program: "PIX_MED"
+    currency: "BRL"
+    thresholds:
+      # PIX MED 2.0 Program (Feb 2026)
+      dispute_rate:
+        green: 0.0030      # ≤0.30% - Safe zone
+        amber: 0.0044      # 0.31-0.44% - PIX MED watch  
+        red: 0.0060        # ≥0.60% - PIX MED breach risk
+      refund_rate:
+        green: 0.0200      # ≤2% - Normal
+        amber: 0.0350      # 2.1-3.5% - Elevated
+        red: 0.0500        # ≥5% - High refund risk
+    visa_requirements:
+      ready: 75           # ≥75 GuardScore (PIX more lenient)
+      pending: 45         # 45-74 = Pending
+      blocked: 0          # <45 = Blocked
+    alerts:
+      pix_med_watch:
+        threshold: 0.0035
+        window_days: 10
+        message: "PIX MED 2.0 early warning - dispute rate trending up"
+        action: "Review PIX dispute SOP and response times"
+      pix_med_breach:
+        threshold: 0.0055
+        window_days: 5
+        message: "PIX MED breach risk - immediate action required"
+        action: "Activate dispute response team and notify PSP"
+    multipliers:
+      profile_weight: 1.0
+      data_verified_boost: 1.25    # PIX data more valuable
+      pix_sop_boost: 1.20
+      high_refund_penalty: 0.80
+
+  EU_CARDS_SCA:
+    name: "EU Cards (SCA)"
+    program: "SCA_PSD2"
+    currency: "EUR"
+    thresholds:
+      # SCA Program Thresholds
+      auth_rate:
+        green: 0.9300      # ≥93% - Excellent SCA performance
+        amber: 0.9000      # 90-93% - Good
+        red: 0.8500        # <85% - Poor SCA implementation
+      dispute_rate:
+        green: 0.0040      # ≤0.40% - Low dispute
+        amber: 0.0070      # 0.41-0.70% - Moderate
+        red: 0.0120        # ≥1.20% - High dispute (EU stricter)
+      exemption_success_rate:
+        green: 0.8000      # ≥80% exemptions approved
+        amber: 0.6000      # 60-80% - Room for improvement
+        red: 0.4000        # <40% - Poor exemption strategy
+    visa_requirements:
+      ready: 78           # EU requires higher compliance
+      pending: 48         # 48-77 = Pending  
+      blocked: 0          # <48 = Blocked
+    alerts:
+      sca_auth_decline:
+        threshold: 0.8800  # <88% auth rate
+        window_days: 7
+        message: "SCA authentication rate declining"
+        action: "Review 3-DS strategy and exemption usage"
+      high_dispute_eu:
+        threshold: 0.0100
+        window_days: 14
+        message: "EU dispute rate elevated - review SCA implementation"
+        action: "Optimize authentication flow and customer experience"
+    multipliers:
+      profile_weight: 1.0
+      data_verified_boost: 1.18
+      sca_strategy_boost: 1.12
+      poor_auth_penalty: 0.70
+
+  OTHER:
+    name: "Other Markets"
+    program: "GENERAL"
+    currency: "USD"
+    thresholds:
+      dispute_rate:
+        green: 0.0060
+        amber: 0.0100
+        red: 0.0150
+      auth_rate:
+        green: 0.9200
+        amber: 0.8800
+        red: 0.8000
+    visa_requirements:
+      ready: 70
+      pending: 40
+      blocked: 0
+    multipliers:
+      profile_weight: 1.0
+      data_verified_boost: 1.10
+
+# Provider-specific multipliers (configurable assumptions)
+providers:
+  stripe:
+    markets:
+      US_CARDS: 1.00
+      BR_PIX: 1.05      # Stripe slightly more lenient on PIX
+      EU_CARDS_SCA: 0.98
+      OTHER: 1.00
+  adyen:
+    markets:
+      US_CARDS: 0.95    # Adyen stricter on VAMP
+      BR_PIX: 1.00
+      EU_CARDS_SCA: 1.02  # Better SCA tools
+      OTHER: 0.98
+  checkout:
+    markets:
+      US_CARDS: 0.92    # Very strict VAMP enforcement
+      BR_PIX: 0.98
+      EU_CARDS_SCA: 1.00
+      OTHER: 0.95
+
+# Confidence weighting system
+confidence:
+  sources:
+    self_attested: 0.30         # Base confidence for questionnaire answers
+    csv_shopify: 0.65           # Shopify CSV upload adds confidence
+    csv_woocommerce: 0.60       # WooCommerce CSV slightly lower quality
+    api_verified: 0.85          # Direct API integration highest confidence
+    psp_reported: 0.90          # PSP-reported metrics highest trust
+  
+  boosters:
+    comprehensive_sop: 0.10     # +10% confidence for good processes
+    data_recency_30d: 0.05      # Recent data gets boost
+    multi_source: 0.08          # Multiple data sources validated
+    
+  penalties:
+    stale_data_90d: -0.15       # Old data loses confidence
+    incomplete_profile: -0.10   # Missing key profile data
+    inconsistent_answers: -0.20 # Contradictory responses
+
+# Alert routing and actions
+alerts:
+  channels:
+    telegram: true              # Send alerts to bot
+    email: true                 # Email notifications
+    webhook: true               # External webhook integration
+    dashboard: true             # In-app notifications
+  
+  escalation:
+    level_1:                    # Early warning
+      delay_hours: 0
+      channels: ["telegram", "dashboard"]
+    level_2:                    # Breach risk  
+      delay_hours: 2
+      channels: ["telegram", "email", "dashboard"]
+    level_3:                    # Critical
+      delay_hours: 0.5
+      channels: ["telegram", "email", "webhook", "dashboard"]
+
+# Visa stamping rules
+visa_stamps:
+  ready:
+    badge: "✅ READY"
+    color: "#22C55E"            # Green
+    description: "Meets market program requirements"
+    validity_days: 180
+  pending:
+    badge: "⚠️ PENDING"  
+    color: "#F59E0B"            # Amber
+    description: "Approaching program thresholds"
+    validity_days: 90
+  blocked:
+    badge: "❌ BLOCKED"
+    color: "#EF4444"            # Red
+    description: "Below program requirements"
+    validity_days: 30
+
+# Kit recommendations by market + vertical
+kit_mapping:
+  market_primary:
+    US_CARDS:
+      default: "builders_standard"
+      CRYPTO: "crypto_founder"
+      CBD: "builders_standard"
+    BR_PIX:
+      default: "global_founder" 
+      CRYPTO: "crypto_founder"
+    EU_CARDS_SCA:
+      default: "global_founder"
+      CRYPTO: "crypto_founder"
+    OTHER:
+      default: "global_founder"
+      
+# Compliance program timelines
+program_updates:
+  PIX_MED_2_0:
+    effective_date: "2026-02-01"
+    preparation_window_days: 180
+    impact_markets: ["BR_PIX"]
+    new_thresholds:
+      dispute_rate_red: 0.0045  # Tighter threshold
+  
+  VAMP_UPDATE_2025:
+    effective_date: "2025-06-01" 
+    preparation_window_days: 120
+    impact_markets: ["US_CARDS"]
+    new_requirements: ["enhanced_3ds", "real_time_alerts"]

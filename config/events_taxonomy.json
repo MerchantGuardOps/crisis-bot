@@ -1,0 +1,20 @@
+{
+  "version": "4.0",
+  "taxonomy": {
+    "question_events": [
+      "q_shown:<ID>",
+      "q_answered:<ID>"
+    ],
+    "flow": [
+      "market.selected",
+      "market.shares_set",
+      "powerup.offered",
+      "powerup.accepted",
+      "csv.uploaded",
+      "passport.issued",
+      "passport.visa_stamped:<MARKET>",
+      "kit.offer_shown:<KIT>",
+      "kit.purchased:<KIT>"
+    ]
+  }
+}

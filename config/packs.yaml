@@ -1,0 +1,26 @@
+version: 1
+storage: local  # or "s3"
+local_base_path: "./packs"
+
+# Map which bundle to send after purchase, based on (market, industry, package)
+routing:
+  readiness_pack_199:
+    default: "US_CARDS/GENERAL/READINESS_PACK_v1.zip"
+    US_CARDS:
+      GENERAL: "US_CARDS/GENERAL/READINESS_PACK_v1.zip"
+      CRYPTO: "US_CARDS/CRYPTO/READINESS_PACK_v1.zip"
+    BR_PIX:
+      GENERAL: "BR_PIX/GENERAL/READINESS_PACK_v1.zip"
+      GAMING:  "BR_PIX/GAMING/READINESS_PACK_v1.zip"
+    EU_CARDS_SCA:
+      CRYPTO: "EU_CARDS/CRYPTO/READINESS_PACK_v1.zip"
+  quick_fix_97:
+    default: "US_CARDS/GENERAL/QUICK_FIX_v1.pdf"
+  kit_builder_499:
+    default: "US_CARDS/GENERAL/BUILDER_KIT_UNLOCK.txt"
+  kit_brazil_499:
+    default: "BR_PIX/GENERAL/BRAZIL_KIT_UNLOCK.txt"
+  kit_crypto_499:
+    default: "EU_CARDS/CRYPTO/CRYPTO_KIT_UNLOCK.txt"
+  kit_cbd_499:
+    default: "US_CARDS/GENERAL/CBD_KIT_UNLOCK.txt"

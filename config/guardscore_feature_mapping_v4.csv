@@ -1,0 +1,28 @@
+question_id,prompt_key,feature_name,dtype,allowed_values,confidence_source,confidence_range,market_scope,model_usage,example_value,notes
+MKT_1,markets_served.list,markets_served.list,array[str],"US_CARDS, BR_PIX, EU_CARDS_SCA, OTHER",attested,0.30–0.60,GLOBAL,all (routing + weights),"['US_CARDS','BR_PIX']",Used to route sub-question sets; enables per-market scoring.
+MKT_2,markets_served.shares,markets_served.shares,"map[str,float]",0.0–1.0; sums ≈ 1.0,attested,0.30–0.60,GLOBAL,overall score weighting,"{'US_CARDS':0.7,'BR_PIX':0.3}",Weight each per-market score by GMV share.
+BP_1,profile.industry,profile.industry,enum,"ECOM, SAAS, CBD, CRYPTO, GAMING, OTHER",attested,0.80–0.95,GLOBAL,all models; vertical overlays,GAMING,Drives vertical overlay risk adjustments.
+BP_2,profile.stage,profile.stage,enum,"EARLY, GROWTH, MATURE, OTHER",attested,0.80–0.95,GLOBAL,all,GROWTH,Correlates with process maturity and volatility.
+BP_3,profile.entity_status,profile.entity_status,enum,"LLC, CORP, SOLE, OTHER",attested,0.80–0.95,GLOBAL,all,LLC,Entity type proxy for compliance readiness.
+BP_4,profile.base_location,profile.base_location,enum,"US, CAN, EU, LATAM, ASIA, OTHER",attested,0.80–0.95,GLOBAL,all (secondary),LATAM,Not used for risk thresholds (market-first); used for ops context.
+BP_5,profile.platform,profile.platform,enum,"Shopify, WooCommerce, Custom, Other",attested,0.90–0.99,GLOBAL,all,Shopify,Triggers CSV/API power-up flows; platform-specific patterns.
+BP_6,ops.policies_complete,ops.policies_complete,bool,true/false,attested,0.80–0.95,GLOBAL,all,true,Terms/refund/shipping/privacy present and consistent.
+BP_7,ops.refund_sla_days,ops.refund_sla_days,int,0–60 or null,attested,0.60–0.90,GLOBAL,all,5,Used in prescriptive engine (+points if ≤ 7 days).
+BP_8,ops.multi_psp_intent,ops.multi_psp_intent,bool,true/false,attested,0.80–0.95,GLOBAL,all,true,Intent to diversify processing; reduces single-PSP exposure.
+BP_9,ops.prior_suspensions,ops.prior_suspensions,bool,true/false,attested,0.80–0.95,GLOBAL,all,false,Penalty feature in profile_score.
+BP_10,ops.step_up_3ds_plan,ops.step_up_3ds_plan,bool,true/false,attested,0.70–0.95,"US_CARDS, EU_CARDS_SCA",US/EU models,true,Boosts profile score for card markets.
+BP_11,ops.aml_kyc_documentation,ops.aml_kyc_documentation,enum,"NONE, PARTIAL, COMPLETE",attested,0.60–0.95,GLOBAL (stronger in CRYPTO/CBD),all + vertical overlays,PARTIAL,Overlay-weighted in high-risk sectors.
+VAMP_1,vamp.monthly_dispute_rate,vamp.cb_dispute_rate_m,float,0.000–0.050,attested or verified,0.30–0.95,US_CARDS,US_CARDS_VAMP,0.008,Early-warning vs 0.0065; threshold 0.01.
+VAMP_2,vamp.chargeback_rate,vamp.cb_rate_m,float,0.000–0.050,attested or verified,0.30–0.95,US_CARDS,US_CARDS_VAMP,0.012,Core VAMP metric; heavier weight than VAMP_1 if verified.
+VAMP_3,ops.dispute_sop_level,ops.dispute_sop_level,enum,"NONE, BASIC, STRONG, COMPREHENSIVE",attested,0.60–0.95,US_CARDS,US_CARDS_VAMP + prescriptive,COMPREHENSIVE,Adds points in profile_score; drives recommendations.
+VAMP_4,ops.compliance_experience,ops.compliance_experience,enum,"FIRST_TIME, INTERMEDIATE, EXPERT",attested,0.60–0.90,US_CARDS,US_CARDS_VAMP,INTERMEDIATE,Small weight; mainly prescriptive tone.
+PIX_1,pix.dispute_rate,pix.dispute_rate_m,float,0.000–0.030,attested or verified,0.30–0.95,BR_PIX,BR_PIX_MED,0.004,Watch at 0.0045; MED at ~0.006.
+PIX_3,pix.med_sop_present,pix.med_sop_present,bool,true/false,attested,0.60–0.95,BR_PIX,BR_PIX_MED + prescriptive,true,Evidence pack / SOP coverage for PIX disputes.
+EU_1,eu.sca_strategy,eu.sca_strategy,enum,"NONE, BASIC, STEP_UP, EXEMPTIONS_PLAN",attested,0.60–0.95,EU_CARDS_SCA,EU_SCA,STEP_UP,Strategy for PSD2 compliance.
+EU_2,eu.auth_rate,eu.auth_rate_m,float,0.50–0.99,attested or verified,0.30–0.95,EU_CARDS_SCA,EU_SCA,0.93,Alerts if <0.92 trending down.
+POWERUP_1,shopify.csv_uploaded,verified.shopify_csv,bool,true/false,system,0.95–1.00,GLOBAL,confidence weighting,true,Increases confidence and data_factor weights.
+POWERUP_2,shopify.api_connected,verified.shopify_api_connected,bool,true/false,system,0.95–1.00,GLOBAL,confidence weighting + streaming,false,Enables streaming features later.
+BEH_DROPOFF,behavior.drop_qid,behavior.drop_qid,string,<question id> or null,system,0.95–1.00,GLOBAL,"all (propensity, UX)",VAMP_3,Used in dropout prediction and UX improvements.
+BEH_LAT,behavior.answer_latency_ms,behavior.answer_latency_ms,int,0–600000,system,0.95–1.00,GLOBAL,all,4200,Proxy for certainty / friction.
+BEH_DEPTH,behavior.session_depth,behavior.session_depth,int,1–200,system,0.95–1.00,GLOBAL,all,17,Engagement depth; correlates with intent.
+BEH_RET,behavior.return_visits_30d,behavior.return_visits_30d,int,0–30,system,0.95–1.00,GLOBAL,all,3,Urgency/intent signal.

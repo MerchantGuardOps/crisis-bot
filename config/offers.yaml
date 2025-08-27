@@ -1,0 +1,36 @@
+pricing:
+  auto_pack_usd: 199
+  quick_fix_usd: 97
+  premium_usd: 499
+
+logic:
+  auto_offer_if:
+    - score_lt: 50
+    - or:
+        - urgent: true
+        - market: ["US_CARDS","BR_PIX","EU_CARDS_SCA"]
+  quick_fix_if:
+    - score_gte: 50
+    - score_lt: 70
+  premium_offer_if:
+    - score_gte: 70
+
+delivery:
+  files_by_industry:
+    GENERAL:
+      - products/general/PSP_List_General.md
+      - products/general/Templates_General.zip
+      - products/universal/SOPs_Universal.zip
+      - products/general/Quick_Approval_Guide.md
+    CBD:
+      - products/cbd/PSP_List_CBD.md
+      - products/cbd/Templates_CBD.zip
+      - products/universal/SOPs_Universal.zip
+    CRYPTO:
+      - products/crypto/PSP_List_Crypto.md
+      - products/crypto/Templates_Crypto.zip
+      - products/universal/SOPs_Universal.zip
+    GAMING:
+      - products/gaming/PSP_List_Gaming.md
+      - products/gaming/Templates_Gaming.zip
+      - products/universal/SOPs_Universal.zip

@@ -1,0 +1,54 @@
+{
+  "providers": [
+    {
+      "id": "provider_1",
+      "name": "High-Risk Specialist A",
+      "active": false,
+      "public_label": "Tier A • Zero ETF • High-Risk Friendly",
+      "risk_tolerance": {
+        "low_risk": 0.3,
+        "medium_risk": 0.7,
+        "high_risk": 1.5
+      },
+      "specialties": ["digital_goods", "crypto_education", "recurring", "high_risk"],
+      "regions": ["US", "EU", "CA"]
+    },
+    {
+      "id": "provider_2", 
+      "name": "Fast Approval B",
+      "active": false,
+      "public_label": "Tier B • Fast Approval • No Default Reserves",
+      "risk_tolerance": {
+        "low_risk": 0.3,
+        "medium_risk": 0.5,
+        "high_risk": 1.2
+      },
+      "specialties": ["high_volume", "international", "fast_approval"],
+      "regions": ["US", "AP"]
+    }
+  ],
+  "contract_traps": {
+    "common": [
+      "Automatic reserve increases on ratio spikes",
+      "Broad termination clauses for 'reputational risk'",
+      "90+ day fund holds after termination",
+      "Personal guarantees from business owners",
+      "Liquidated damages for early termination"
+    ],
+    "negotiate": [
+      "Cap reserve percentages (max 10-15%)",
+      "Define specific termination triggers",
+      "Negotiate 30-day fund release",
+      "Remove personal guarantee requirements",
+      "Add volume-based rate reductions"
+    ]
+  },
+  "generic_messaging": {
+    "high_tolerance": "Some processors specialize in higher-risk accounts with ratios up to 1.2%",
+    "standard_tolerance": "Most processors maintain internal limits around 0.5-0.7%",
+    "enterprise_options": "Enterprise accounts may receive higher tolerance with security deposits",
+    "backup_strategy": "Maintain relationships with 2-3 processors for risk management"
+  },
+  "disclaimer": "Provider information is for educational purposes. No endorsement implied. Verify terms independently.",
+  "last_updated": "2025-08-22"
+}

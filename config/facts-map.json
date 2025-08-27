@@ -1,0 +1,113 @@
+{
+  "_meta": {
+    "description": "Canonical mapping from Facts JSON to stable anchor URLs",
+    "updated": "2025-08-21T00:00:00Z",
+    "version": "1.0",
+    "usage": "Used by Facts JSON citations, HTML cross-linking, and CI validation"
+  },
+  
+  "vamp": {
+    "en": {
+      "primary": "https://merchantguard.ai/guides/vamp-2025/#vamp-definition",
+      "thresholds": "https://merchantguard.ai/guides/vamp-2025/#brazil-thresholds",
+      "calculator": "https://merchantguard.ai/tools/vamp-calculator/#vamp-calculator-tool",
+      "enforcement": "https://merchantguard.ai/guides/vamp-2025/#enforcement-dates"
+    },
+    "pt-br": {
+      "primary": "https://merchantguard.ai/pt-br/guias/vamp-2025/#definicao-vamp",
+      "thresholds": "https://merchantguard.ai/pt-br/guias/vamp-2025/#limites-brasil",
+      "calculator": "https://merchantguard.ai/pt-br/ferramentas/calculadora-vamp/#ferramenta-calculadora-vamp",
+      "enforcement": "https://merchantguard.ai/pt-br/guias/vamp-2025/#datas-execucao"
+    },
+    "es": {
+      "primary": "https://merchantguard.ai/es/guias/vamp-2025/#definicion-vamp",
+      "thresholds": "https://merchantguard.ai/es/guias/vamp-2025/#umbrales-brasil",
+      "calculator": "https://merchantguard.ai/es/herramientas/calculadora-vamp/#herramienta-calculadora-vamp",
+      "enforcement": "https://merchantguard.ai/es/guias/vamp-2025/#fechas-aplicacion"
+    }
+  },
+
+  "dispute-rate": {
+    "en": {
+      "primary": "https://merchantguard.ai/guides/chargeback-prevention/#dispute-rate-definition",
+      "calculation": "https://merchantguard.ai/guides/chargeback-prevention/#dispute-rate-calculation",
+      "thresholds": "https://merchantguard.ai/guides/chargeback-prevention/#industry-thresholds",
+      "prevention": "https://merchantguard.ai/guides/chargeback-prevention/#prevention-strategies"
+    },
+    "pt-br": {
+      "primary": "https://merchantguard.ai/pt-br/guias/prevencao-estornos/#definicao-taxa-disputa",
+      "calculation": "https://merchantguard.ai/pt-br/guias/prevencao-estornos/#calculo-taxa-disputa",
+      "thresholds": "https://merchantguard.ai/pt-br/guias/prevencao-estornos/#limites-industria",
+      "prevention": "https://merchantguard.ai/pt-br/guias/prevencao-estornos/#estrategias-prevencao"
+    },
+    "es": {
+      "primary": "https://merchantguard.ai/es/guias/prevencion-contracargos/#definicion-tasa-disputa",
+      "calculation": "https://merchantguard.ai/es/guias/prevencion-contracargos/#calculo-tasa-disputa",
+      "thresholds": "https://merchantguard.ai/es/guias/prevencion-contracargos/#umbrales-industria",
+      "prevention": "https://merchantguard.ai/es/guias/prevencion-contracargos/#estrategias-prevencion"
+    }
+  },
+
+  "pix-med": {
+    "en": {
+      "primary": "https://merchantguard.ai/guides/brazil-compliance/#pix-med-definition",
+      "threshold": "https://merchantguard.ai/guides/brazil-compliance/#pix-med-threshold",
+      "penalties": "https://merchantguard.ai/guides/brazil-compliance/#pix-med-penalties",
+      "compliance": "https://merchantguard.ai/guides/brazil-compliance/#pix-med-compliance"
+    },
+    "pt-br": {
+      "primary": "https://merchantguard.ai/pt-br/guias/conformidade-brasil/#definicao-pix-med",
+      "threshold": "https://merchantguard.ai/pt-br/guias/conformidade-brasil/#limiar-pix-med",
+      "penalties": "https://merchantguard.ai/pt-br/guias/conformidade-brasil/#penalidades-pix-med",
+      "compliance": "https://merchantguard.ai/pt-br/guias/conformidade-brasil/#conformidade-pix-med"
+    },
+    "es": {
+      "primary": "https://merchantguard.ai/es/guias/cumplimiento-brasil/#definicion-pix-med",
+      "threshold": "https://merchantguard.ai/es/guias/cumplimiento-brasil/#umbral-pix-med",
+      "penalties": "https://merchantguard.ai/es/guias/cumplimiento-brasil/#penalidades-pix-med",
+      "compliance": "https://merchantguard.ai/es/guias/cumplimiento-brasil/#cumplimiento-pix-med"
+    }
+  },
+
+  "reserves": {
+    "en": {
+      "primary": "https://merchantguard.ai/guides/best-high-risk-merchant-accounts-2025/#rolling-reserves-definition",
+      "calculation": "https://merchantguard.ai/guides/best-high-risk-merchant-accounts-2025/#reserve-calculation",
+      "tiers": "https://merchantguard.ai/guides/best-high-risk-merchant-accounts-2025/#reserve-tiers",
+      "release": "https://merchantguard.ai/guides/best-high-risk-merchant-accounts-2025/#reserve-release-timeline"
+    },
+    "pt-br": {
+      "primary": "https://merchantguard.ai/pt-br/guias/melhores-contas-comerciantes-alto-risco-2025/#definicao-reservas-rotativas",
+      "calculation": "https://merchantguard.ai/pt-br/guias/melhores-contas-comerciantes-alto-risco-2025/#calculo-reserva",
+      "tiers": "https://merchantguard.ai/pt-br/guias/melhores-contas-comerciantes-alto-risco-2025/#niveis-reserva",
+      "release": "https://merchantguard.ai/pt-br/guias/melhores-contas-comerciantes-alto-risco-2025/#cronograma-liberacao-reserva"
+    },
+    "es": {
+      "primary": "https://merchantguard.ai/es/guias/mejores-cuentas-comerciantes-alto-riesgo-2025/#definicion-reservas-rotativas",
+      "calculation": "https://merchantguard.ai/es/guias/mejores-cuentas-comerciantes-alto-riesgo-2025/#calculo-reserva",
+      "tiers": "https://merchantguard.ai/es/guias/mejores-cuentas-comerciantes-alto-riesgo-2025/#niveles-reserva",
+      "release": "https://merchantguard.ai/es/guias/mejores-cuentas-comerciantes-alto-riesgo-2025/#cronograma-liberacion-reserva"
+    }
+  },
+
+  "etf-clauses": {
+    "en": {
+      "primary": "https://merchantguard.ai/guides/payment-processing-contracts/#etf-definition",
+      "calculation": "https://merchantguard.ai/guides/payment-processing-contracts/#etf-calculation",
+      "ranges": "https://merchantguard.ai/guides/payment-processing-contracts/#etf-typical-ranges",
+      "avoidance": "https://merchantguard.ai/guides/payment-processing-contracts/#avoiding-etf-clauses"
+    },
+    "pt-br": {
+      "primary": "https://merchantguard.ai/pt-br/guias/contratos-processamento-pagamentos/#definicao-taxa-rescisao",
+      "calculation": "https://merchantguard.ai/pt-br/guias/contratos-processamento-pagamentos/#calculo-taxa-rescisao",
+      "ranges": "https://merchantguard.ai/pt-br/guias/contratos-processamento-pagamentos/#faixas-tipicas-taxa-rescisao",
+      "avoidance": "https://merchantguard.ai/pt-br/guias/contratos-processamento-pagamentos/#evitando-clausulas-taxa-rescisao"
+    },
+    "es": {
+      "primary": "https://merchantguard.ai/es/guias/contratos-procesamiento-pagos/#definicion-tarifa-terminacion",
+      "calculation": "https://merchantguard.ai/es/guias/contratos-procesamiento-pagos/#calculo-tarifa-terminacion",
+      "ranges": "https://merchantguard.ai/es/guias/contratos-procesamiento-pagos/#rangos-tipicos-tarifa-terminacion",
+      "avoidance": "https://merchantguard.ai/es/guias/contratos-procesamiento-pagos/#evitando-clausulas-tarifa-terminacion"
+    }
+  }
+}

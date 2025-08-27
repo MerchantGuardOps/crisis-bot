@@ -1,0 +1,27 @@
+{
+  "bands": [
+    { "max": 0.003, "label": "INVISIBLE MONITORING", "action": "track quietly", "color": "green" },
+    { "max": 0.005, "label": "FLAGGED", "action": "review + plan", "color": "yellow" },
+    { "max": 0.007, "label": "RESERVES LIKELY", "action": "5–15% rolling reserves", "color": "orange" },
+    { "max": 0.009, "label": "TERMINATION RISK", "action": "30-day notice common", "color": "red" },
+    { "max": 1, "label": "AFTER 0.9%", "action": "termination / 100% holds likely", "color": "red" }
+  ],
+  "copy": {
+    "truth_line": "PSPs act before networks: 0.3% monitor • 0.5% review • 0.7% reserves • 0.9% termination",
+    "reality_check": "Most merchants never reach VAMP thresholds because PSPs terminate them first"
+  },
+  "industry_tolerances": {
+    "high_risk_gaming": {
+      "max_tolerance": 0.012,
+      "note": "iGaming/crypto merchants may get up to 1.2% tolerance"
+    },
+    "cbd_digital": {
+      "max_tolerance": 0.009,
+      "note": "CBD, supplements, digital services typically cut at 0.9%"
+    },
+    "low_risk": {
+      "max_tolerance": 0.005,
+      "note": "Healthcare, education, Singapore entities held to <0.5%"
+    }
+  }
+}

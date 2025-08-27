@@ -1,0 +1,44 @@
+providers:
+  fastspring:
+    label: "FastSpring"
+    best_for: "SaaS, courses, digital downloads"
+    typical_timeframe: "3–5 days"
+    success_rate_seed: "72% approval (digital; seed)"
+    notes: "Manual underwriting; nuanced cases considered."
+    affiliate_id_env: "FASTSPRING_PARTNER_ID"
+  paddle:
+    label: "Paddle"
+    best_for: "Pure-play SaaS (clean compliance)"
+    typical_timeframe: "5–10 days"
+    success_rate_seed: "60–70% (SaaS; seed)"
+    affiliate_id_env: "PADDLE_PARTNER_ID"
+  durango:
+    label: "Durango Merchant Services"
+    best_for: "CBD, nutraceuticals, MATCH recovery"
+    typical_timeframe: "7–14 days"
+    success_rate_seed: "45% (MATCH; seed)"
+    affiliate_id_env: "DURANGO_AFFILIATE_ID"
+  paymentcloud:
+    label: "PaymentCloud"
+    best_for: "Physical goods, subscriptions, mixed catalogs"
+    typical_timeframe: "7–21 days"
+    success_rate_seed: "50–65% (profile‑dependent; seed)"
+    affiliate_id_env: "PAYMENTCLOUD_AFFILIATE_ID"
+  emb:
+    label: "EMerchant Broker (EMB)"
+    best_for: "High‑risk + offshore fallback"
+    typical_timeframe: "10–21 days"
+    success_rate_seed: "40–55% (varies; seed)"
+    affiliate_id_env: "EMB_AFFILIATE_ID"
+  soar:
+    label: "Soar Payments"
+    best_for: "Domestic high‑risk"
+    typical_timeframe: "10–21 days"
+    success_rate_seed: "35–50% (seed)"
+    affiliate_id_env: "SOAR_AFFILIATE_ID"
+  host:
+    label: "Host Merchant Services"
+    best_for: "Aggregate risk; lower volumes"
+    typical_timeframe: "7–14 days"
+    success_rate_seed: "50–60% (smaller books; seed)"
+    affiliate_id_env: "HOST_AFFILIATE_ID"

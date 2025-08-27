@@ -1,0 +1,24 @@
+{
+  "season": {
+    "id": 1,
+    "name": "Genesis Season",
+    "end_date": null,
+    "copy": {
+      "about": "MGRD Points track ecosystem contribution. Points will be important.",
+      "tiers": ["Merchant", "Guardian", "Validator", "Oracle"]
+    }
+  },
+  "awards": {
+    "match_purchase": 800,
+    "match_progress": 200,
+    "match_success": 500,
+    "match_full_recovery": 1000,
+    "share_verify": 100,
+    "vamp_purchase": 400,
+    "attestation_issued": 300
+  },
+  "limits": {
+    "share_verify_daily": 3,
+    "max_points_per_action": 5000
+  }
+}

@@ -1,0 +1,35 @@
+version: 1
+disclosure:
+  short: "Independent recommendations. No affiliate relationship."
+  long: |
+    We provide independent recommendations based on your profile. We do not have formal affiliate relationships with these providers at this time. You can mention "MerchantGuard" as your referral source.
+
+providers:
+  durango:
+    name: "Durango Merchant Services"
+    url: "https://durangomerchantservices.com"
+    category: "psp"
+    description: "High‑risk & MATCH recovery specialists"
+    status: "pending"       # explicitly says we have no deal yet
+    visible: true
+  paymentcloud:
+    name: "PaymentCloud"
+    url: "https://paymentcloudinc.com"
+    category: "psp"
+    description: "High‑risk e‑commerce friendly"
+    status: "pending"
+    visible: true
+  complianceguard:
+    name: "ComplianceGuard (Legal Review)"
+    url: "https://example.com/compliance-review"     # placeholder (no partner)
+    category: "legal"
+    description: "Same‑day VAMP/MATCH legal review"
+    status: "pending"
+    visible: true
+  firstbase:
+    name: "FirstBase (LLC Formation)"
+    url: "https://www.firstbase.io/"
+    category: "formation"
+    description: "24‑hour LLC formation, clean entity set‑up"
+    status: "pending"
+    visible: true

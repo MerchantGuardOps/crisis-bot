@@ -1,0 +1,9 @@
+{
+  "status": "ready",
+  "last_updated": "2025-08-24T16:14:23.137926",
+  "total_documents": 35,
+  "categories": {
+    "facts": 15,
+    "qna": 20
+  }
+}

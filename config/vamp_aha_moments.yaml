@@ -1,0 +1,169 @@
+version: "1.0"
+description: "VAMP Assessment Aha Moments - Real-time contextual insights during assessment"
+
+# Aha moment triggers for each VAMP question
+aha_moments:
+  VAMP_1:  # Monthly dispute ratio
+    triggers:
+      - condition: "value >= 0.0075"  # Above 0.75%
+        severity: "critical"
+        insight:
+          title: "🚨 Dispute Rate Alert"
+          message: "Your dispute rate of {value:.3%} exceeds Visa's 0.75% threshold. This puts you at risk for VAMP monitoring."
+          impact: "PSPs will flag this immediately and may require reserves or decline your application."
+          action: "Priority: Implement dispute prevention controls before applying to new processors."
+          
+      - condition: "value >= 0.0065 and value < 0.0075"  # 0.65% - 0.74%
+        severity: "warning" 
+        insight:
+          title: "⚠️ Approaching VAMP Threshold"
+          message: "At {value:.3%}, you're approaching Visa's 0.75% dispute monitoring threshold."
+          impact: "You have ~{buffer:.0f} disputes of buffer before VAMP enrollment."
+          action: "Recommended: Strengthen dispute prevention now to avoid future issues."
+          buffer_calculation: "monthly_volume * (0.0075 - value)"
+          
+      - condition: "value < 0.005"  # Below 0.5%
+        severity: "positive"
+        insight:
+          title: "✅ Strong Dispute Performance"
+          message: "Your {value:.3%} dispute rate is well below industry benchmarks."
+          impact: "This is a competitive advantage that PSPs will view favorably."
+          action: "Document your dispute prevention methods to showcase during underwriting."
+
+  VAMP_2:  # Chargeback rate
+    triggers:
+      - condition: "value >= 0.009"  # Above 0.9%
+        severity: "critical"
+        insight:
+          title: "🚨 Chargeback Monitoring Risk"
+          message: "Your {value:.3%} chargeback rate exceeds Visa's 0.9% threshold for VDMP monitoring."
+          impact: "This triggers mandatory monitoring programs with fines up to $25,000/month."
+          action: "Critical: Implement chargeback prevention before processor applications."
+          
+      - condition: "value >= 0.0075 and value < 0.009"  # 0.75% - 0.89%
+        severity: "warning"
+        insight:
+          title: "⚠️ Approaching Chargeback Threshold" 
+          message: "At {value:.3%}, you're nearing Visa's 0.9% chargeback monitoring threshold."
+          impact: "You have limited buffer before entering expensive monitoring programs."
+          action: "Recommended: Implement 3D Secure and fraud screening immediately."
+          
+      - condition: "value < 0.005"  # Below 0.5%
+        severity: "positive"
+        insight:
+          title: "✅ Excellent Chargeback Control"
+          message: "Your {value:.3%} chargeback rate demonstrates strong fraud prevention."
+          impact: "PSPs will view this as evidence of operational excellence."
+          action: "Highlight this performance advantage in processor applications."
+
+  VAMP_3:  # Dispute management SOP
+    triggers:
+      - condition: "value == 'None'"
+        severity: "critical"
+        insight:
+          title: "🚨 Missing Dispute Management"
+          message: "Without documented dispute procedures, you're defenseless against chargebacks."
+          impact: "PSPs will view this as high operational risk, especially combined with your dispute metrics."
+          action: "Critical: Implement dispute SOP templates before processor review."
+          
+      - condition: "value == 'Basic'"
+        severity: "warning"
+        insight:
+          title: "⚠️ Weak Dispute Defense"
+          message: "Ad-hoc dispute handling leads to inconsistent outcomes and higher losses."
+          impact: "Your win rate is likely 20-40% lower than merchants with proper SOPs."
+          action: "Upgrade to templated evidence packs and clear escalation procedures."
+          
+      - condition: "value == 'Comprehensive'"
+        severity: "positive"
+        insight:
+          title: "✅ Professional Dispute Operations"
+          message: "Comprehensive SOPs with templates and SLAs show operational maturity."
+          impact: "This significantly strengthens your risk profile with processors."
+          action: "Emphasize your dispute management excellence during underwriting."
+
+  VAMP_4:  # Compliance experience
+    triggers:
+      - condition: "value == 'First-time'"
+        severity: "warning"
+        insight:
+          title: "⚠️ Compliance Learning Curve"
+          message: "First-time compliance navigation increases your risk profile with PSPs."
+          impact: "Processors may require additional documentation or impose stricter terms."
+          action: "Consider compliance consultation to avoid common first-timer mistakes."
+          
+      - condition: "value == 'Expert'"
+        severity: "positive" 
+        insight:
+          title: "✅ Compliance Expertise Advantage"
+          message: "Your compliance experience is a significant asset during underwriting."
+          impact: "PSPs trust experienced merchants and may offer better terms."
+          action: "Leverage this expertise to negotiate favorable processing agreements."
+
+# Combined insights based on multiple answers
+combined_insights:
+  high_risk_profile:
+    conditions:
+      - "VAMP_1 >= 0.0075"  # High dispute rate
+      - "VAMP_2 >= 0.009"   # High chargeback rate
+    severity: "critical"
+    insight:
+      title: "🚨 Critical VAMP Risk Profile"
+      message: "Your metrics indicate active VAMP monitoring eligibility with potential fines."
+      impact: "Most PSPs will decline or require significant reserves (10-20% of monthly volume)."
+      action: "Mandatory: Resolve dispute/chargeback issues before any processor applications."
+      
+  borderline_profile:
+    conditions:
+      - "VAMP_1 >= 0.0065"  # Elevated dispute rate
+      - "VAMP_3 in ['Basic', 'None']"  # Weak SOPs
+    severity: "warning"
+    insight:
+      title: "⚠️ Elevated Risk Indicators"
+      message: "Your metrics show early warning signs that processors will scrutinize."
+      impact: "Expect additional due diligence, possible reserves, and stricter monitoring."
+      action: "Strengthen operations before metrics worsen and options become limited."
+      
+  strong_profile:
+    conditions:
+      - "VAMP_1 < 0.005"    # Low dispute rate
+      - "VAMP_2 < 0.005"    # Low chargeback rate
+      - "VAMP_3 == 'Comprehensive'"  # Strong SOPs
+    severity: "positive"
+    insight:
+      title: "✅ Premium Risk Profile"
+      message: "Your metrics demonstrate exceptional operational control."
+      impact: "You qualify for the best processing terms and rates available."
+      action: "Use this strong profile to negotiate competitive agreements with top-tier PSPs."
+
+# Contextual recommendations based on business profile
+contextual_recommendations:
+  early_stage:
+    condition: "BP_2 == 'EARLY'"
+    message: "As an early-stage business, establishing strong dispute prevention now prevents future VAMP issues."
+    
+  high_risk_vertical:
+    condition: "BP_1 == 'CBD'"
+    message: "High-risk verticals face stricter VAMP scrutiny. Your metrics will be compared against industry-specific thresholds."
+    
+  multi_psp_intent:
+    condition: "BP_6 == True"
+    message: "Planning multi-PSP? Each processor will evaluate your VAMP metrics independently. Clean metrics unlock better backup options."
+
+# Educational insights
+educational_content:
+  vamp_fines:
+    title: "VAMP Fine Structure"
+    content: |
+      • $5,000/month: Initial monitoring fee
+      • $25,000/month: Excessive dispute ratio (>1.5%)
+      • $50,000/month: Non-compliance with remediation
+      • Account termination: Repeated violations
+      
+  dispute_vs_chargeback:
+    title: "Disputes vs Chargebacks"
+    content: |
+      • Dispute: Customer contacts bank before merchant
+      • Chargeback: Bank reverses without merchant input
+      • Prevention: Strong customer service reduces disputes
+      • Response: Documented evidence wins chargeback fights

@@ -1,12 +1,16 @@
 {
-  "name": "crisis-bot",
-  "version": "1.0.0",
+  "name": "guardscore-bot-complete",
+  "version": "5.0.0",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "node index.js"
+    "dev": "node index.js",
+    "python": "python3 main.py"
   },
   "dependencies": {
     "telegraf": "^4.16.3"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }

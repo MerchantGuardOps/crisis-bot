@@ -1,0 +1,67 @@
+{
+  "country_exemptions": {
+    "domestic_only": [
+      {
+        "country": "Brazil",
+        "country_code": "BR",
+        "currency": "BRL",
+        "scope": "domestic_transactions_only",
+        "cross_border_applies": true,
+        "status": "exempt_until_local_program",
+        "alternative_program": {
+          "name": "Pix MED 2.0",
+          "threshold": "0.6%",
+          "reserve_range": "16-20%",
+          "enforcement": "active"
+        },
+        "visa_statement": "Programs for Brazil, Chile, and India will be announced later",
+        "effective_date": "2025-10-01",
+        "notes": "Domestic BRL transactions excluded from VAMP. Cross-border USD/EUR transactions still subject to global thresholds."
+      },
+      {
+        "country": "Chile", 
+        "country_code": "CL",
+        "currency": "CLP",
+        "scope": "domestic_transactions_only",
+        "cross_border_applies": true,
+        "status": "exempt_until_local_program",
+        "alternative_program": null,
+        "visa_statement": "Programs for Brazil, Chile, and India will be announced later",
+        "effective_date": "2025-10-01",
+        "notes": "Domestic CLP transactions excluded from VAMP. Cross-border transactions subject to LATAM 1.5% threshold."
+      },
+      {
+        "country": "India",
+        "country_code": "IN", 
+        "currency": "INR",
+        "scope": "domestic_transactions_only",
+        "cross_border_applies": true,
+        "status": "exempt_until_local_program",
+        "alternative_program": null,
+        "visa_statement": "Programs for Brazil, Chile, and India will be announced later",
+        "effective_date": "2025-10-01",
+        "notes": "Domestic INR transactions excluded from VAMP. Cross-border transactions subject to APAC thresholds."
+      }
+    ]
+  },
+  "exemption_validation": {
+    "transaction_currency_detection": {
+      "domestic": ["BRL", "CLP", "INR"],
+      "cross_border": ["USD", "EUR", "GBP", "CAD", "AUD", "SGD", "HKD"]
+    },
+    "processing_location": {
+      "requires_domestic_processor": true,
+      "cross_border_processors_subject": ["Stripe", "Adyen", "Worldpay", "PayPal"]
+    }
+  },
+  "compliance_notes": {
+    "psp_interpretation": "Most PSPs apply VAMP rules to ALL transactions regardless of exemptions",
+    "merchant_action": "Merchants in exempt countries should verify PSP policy on domestic vs cross-border treatment",
+    "audit_trail": "Keep records of transaction currency and processing location for compliance verification"
+  },
+  "update_schedule": {
+    "last_updated": "2025-08-22",
+    "next_review": "2025-10-01",
+    "monitoring": "Watch for Visa announcements on Brazil/Chile/India local programs"
+  }
+}

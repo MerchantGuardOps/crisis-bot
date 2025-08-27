@@ -1,0 +1,35 @@
+version: 1.0
+group: AUTO_FLOW_MINI
+locales: [en, pt-BR]
+items:
+  - id: MKT_1
+    type: multiselect
+    prompt:
+      en: "Where are your customers? (pick all that apply)"
+      pt-BR: "Onde estão seus clientes? (selecione todas as opções)"
+    options: [US_CARDS, BR_PIX, EU_CARDS_SCA, OTHER]
+    map_to: markets_served.list
+
+  - id: QA_1
+    type: single_select
+    prompt:
+      en: "What is your current monthly dispute ratio?"
+      pt-BR: "Qual é sua taxa mensal de disputas?"
+    options: ["<0.5%", "0.5–1.0%", "1.0–1.5%", ">1.5%", "Unknown"]
+    map_to: vamp.monthly_dispute_rate_bucket
+
+  - id: QA_2
+    type: single_select
+    prompt:
+      en: "Do you have a written dispute SOP (who/when/how)?"
+      pt-BR: "Você possui um SOP de disputas por escrito (quem/quando/como)?"
+    options: ["Comprehensive", "Basic", "None"]
+    map_to: ops.dispute_sop_level
+
+  - id: QA_3
+    type: single_select
+    prompt:
+      en: "Which platform do you use?"
+      pt-BR: "Qual plataforma você usa?"
+    options: ["Shopify", "WooCommerce", "Custom/Other"]
+    map_to: profile.platform

@@ -1,0 +1,116 @@
+version: 1
+currency: USD
+
+# Product catalog (automated & semi-automated)
+packages:
+  readiness_pack_199:
+    name: "PSP Readiness Pack"
+    price_usd: 199
+    tier: "digital"
+    description: >
+      Instant delivery. Includes market-specific PSP shortlist (8–12), pre-filled application templates,
+      SOPs for disputes/refunds/KYC, approval checklist, and outreach email scripts.
+    stripe_price_id: "price_1QEReadinessPack199"    # LIVE: PSP Readiness Pack
+    locales:
+      en:
+        cta: "Get the PSP Readiness Pack — $199"
+      pt-BR:
+        cta: "Obter o Pacote de Prontidão PSP — $199"
+  quick_hit_97:
+    name: "Quick-Hit Kit"
+    sku: "MG-QH-097"
+    price_usd: 97
+    tier: "emergency_digital"
+    description: >
+      60-minute emergency triage system with 12 instant fixes, VAMP calculator, PSP red-flag scanner, and 30-day email course. Can materially reduce disputes (often 15-40%+ depending on traffic mix).
+    stripe_price_id: "price_1QEQuickHit97"    # LIVE: Quick-Hit Kit
+    download_bundle: "/assets/quick-hit/bundle.zip"
+    email_course_key: "quick_hit"
+    guarantee_days: 30
+    locales:
+      en: { cta: "Quick-Hit Kit — $97" }
+      pt-BR: { cta: "Kit Quick-Hit — $97" }
+  loom_review_297:
+    name: "Emergency Review (Async)"
+    price_usd: 297
+    tier: "service_async"
+    description: >
+      Upload your materials; get a 20–30 min Loom review with prioritized fixes within 24–48h.
+    stripe_price_id: "price_1QEEmergencyReview297"    # LIVE: Emergency Review
+    locales:
+      en: { cta: "Emergency Review — $297" }
+      pt-BR: { cta: "Revisão de Emergência — $297" }
+  kit_builder_499:
+    name: "Builder's Starter Kit"
+    price_usd: 499
+    tier: "premium_kit"
+    description: >
+      Full interactive workflow + templates + Earned Passport on completion.
+    stripe_price_id: "price_1QEBuilderKit499"    # LIVE: Builder's Starter Kit
+    locales:
+      en: { cta: "Builder’s Kit — $499" }
+      pt-BR: { cta: "Kit do Builder — $499" }
+  kit_brazil_499:
+    name: "Brazil PIX Kit"
+    price_usd: 499
+    tier: "premium_kit"
+    description: "PIX MED 2.0 playbook, dispute SOPs, and Earned Passport."
+    stripe_price_id: "price_1QEBrazilPIXKit499"    # LIVE: Brazil PIX Kit
+    locales:
+      en: { cta: "Brazil PIX Kit — $499" }
+      pt-BR: { cta: "Kit PIX Brasil — $499" }
+  kit_crypto_499:
+    name: "Crypto Founder Kit"
+    price_usd: 499
+    tier: "premium_kit"
+    description: "Banking + tokenomics compliance workflow. Earned Passport."
+    stripe_price_id: "price_1QECryptoFounder499"    # LIVE: Crypto Founder's Kit
+    locales:
+      en: { cta: "Crypto Kit — $499" }
+      pt-BR: { cta: "Kit Crypto — $499" }
+  kit_global_499:
+    name: "Global Founder Kit"
+    price_usd: 499
+    tier: "premium_kit"
+    description: "International banking + multi-jurisdiction compliance workflow. Earned Passport."
+    stripe_price_id: "price_1QEGlobalFounder499"    # LIVE: Global Founder Kit
+    locales:
+      en: { cta: "Global Kit — $499" }
+      pt-BR: { cta: "Kit Global — $499" }
+  kit_cbd_499:
+    name: "CBD / High-Risk Kit"
+    price_usd: 499
+    tier: "premium_kit"
+    description: "High-risk navigation with SOPs and Earned Passport."
+    stripe_price_id: "price_1QECBDHighRisk499"    # LIVE: CBD/High-Risk Kit
+    locales:
+      en: { cta: "CBD Kit — $499" }
+      pt-BR: { cta: "Kit CBD — $499" }
+
+# Offer rules based on risk & context; users can still choose manually
+offer_logic:
+  default_menu:
+    show: ["quick_hit_97", "readiness_pack_199", "kit_builder_499"]
+  by_market:
+    US_CARDS:
+      show: ["readiness_pack_199", "kit_builder_499", "loom_review_297"]
+    BR_PIX:
+      show: ["readiness_pack_199", "kit_brazil_499", "quick_fix_97"]
+    EU_CARDS_SCA:
+      show: ["readiness_pack_199", "kit_crypto_499", "kit_builder_499"]
+    GLOBAL_MULTI:
+      show: ["readiness_pack_199", "kit_global_499", "loom_review_297"]
+  by_industry:
+    CRYPTO:
+      show: ["readiness_pack_199", "kit_crypto_499", "loom_review_297"]
+    CBD:
+      show: ["readiness_pack_199", "kit_cbd_499", "loom_review_297"]
+    GAMING:
+      show: ["readiness_pack_199", "kit_brazil_499", "loom_review_297"]
+
+# Post-purchase upsell
+upsell:
+  after_readiness_pack_199:
+    suggest: ["kit_builder_499", "kit_brazil_499", "kit_crypto_499", "kit_cbd_499"]
+  after_quick_hit_97:
+    suggest: ["readiness_pack_199", "kit_builder_499"]

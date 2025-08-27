@@ -1,0 +1,33 @@
+# MerchantGuard GuardScore Bot - Production Dependencies
+# Core bot framework
+aiogram==3.4.1
+
+# FastAPI for payment processing
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+
+# Database connectivity
+asyncpg==0.29.0
+
+# HTTP client for payment providers
+httpx>=0.27.0
+
+# Crypto for payment signatures
+cryptography>=42.0.0
+
+# Machine Learning dependencies
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Redis for caching and performance
+redis>=5.0.0
+aioredis>=2.0.1
+
+# Additional utilities
+python-dateutil==2.8.2
+python-dotenv==1.0.1
+PyYAML>=6.0.2
+
+# Scaling infrastructure
+google-cloud-tasks>=2.13.0

@@ -1,0 +1,412 @@
+# config/features.yaml
+# MerchantGuard Feature Configuration
+# Controls bot behavior, pricing, gating, and experiments
+
+version: "4.0"
+updated_at: "2025-08-18"
+
+# Global configuration
+global:
+  brand_name: "MerchantGuard"
+  formal_name: "GuardScore™ Compliance Passport"
+  shorthand: "Compliance Passport"
+  website_url: "https://merchantguard.ai"
+  support_email: "support@merchantguard.ai"
+
+# Pricing configuration (all in USD)
+pricing:
+  kits:
+    unified_price: 499
+    currency: "USD"
+    payment_methods: ["telegram_stars", "stripe"]
+  
+  addons:
+    reviewed_passport: 199
+    application_pack: 99
+    pro_report_upgrade: 1501  # $2000 - $499 credit
+    
+  renewals:
+    passport_renewal: 99
+    renewal_period_days: 180
+
+# Passport configuration
+passport:
+  validity_days: 180
+  renewal_grace_period_days: 30
+  tiers:
+    self_attested:
+      name: "Self-Attested"
+      issuer: "MerchantGuard Bot (Self-Attested)"
+      requirements: ["mini_check_completed"]
+      badge_color: "#6b7280"
+    data_verified:
+      name: "Data-Verified" 
+      issuer: "MerchantGuard Bot (Data-Verified)"
+      requirements: ["mini_check_completed", "csv_uploaded", "data_processed"]
+      badge_color: "#22d3ee"
+      score_boost_range: [5, 15]
+    reviewed:
+      name: "Reviewed"
+      issuer: "MerchantGuard Expert Review"
+      requirements: ["passport_exists", "payment_received", "human_review"]
+      badge_color: "#a855f7"
+      sla_hours: 24
+  
+  signature:
+    algorithm: "HMAC-SHA256"
+    key_rotation_days: 90
+
+# Guide configuration
+guides:
+  builder_starter_kit:
+    slug: "guide_fintech_1day"
+    start_param: "guide_fintech_1day"
+    title: "1-Day Fintech Compliance Guide"
+    persona: "builders"
+    flow_type: "freemium"
+    give_pdf_after: "mini_check"
+    upsell_kit: "builders_standard"
+    pdf_name: "fintech_compliance_1day.pdf"
+    
+  guardscore_learning:
+    slug: "guide_learning_modules"
+    start_param: "guide_learning_modules"
+    title: "GuardScore™ Learning Modules"
+    persona: "education"
+    flow_type: "freemium"
+    give_pdf_after: "mini_check"
+    upsell_kit: "builders_standard"
+    pdf_name: "guardscore_learning_modules.pdf"
+    
+  brazil_pix_med:
+    slug: "guide_pix_med_brazil"
+    start_param: "guide_pix_med_brazil"
+    title: "Brazil Pix MED 2.0 Playbook"
+    persona: "global"
+    flow_type: "freemium"
+    give_pdf_after: "mini_check"
+    upsell_kit: "global_founder"
+    pdf_name: "brazil_pix_med_playbook.pdf"
+    
+  cbd_processing:
+    slug: "guide_cbd_processing"
+    start_param: "guide_cbd_processing"
+    title: "High-Risk CBD Processing Guide"
+    persona: "builders"
+    flow_type: "freemium"
+    give_pdf_after: "mini_check"
+    upsell_kit: "builders_standard"
+    pdf_name: "cbd_processing_guide.pdf"
+    
+  global_payment_rails:
+    slug: "guide_global_payment_rails"
+    start_param: "guide_global_payment_rails"
+    title: "Global Payment Rails Guide"
+    persona: "global"
+    flow_type: "freemium"
+    give_pdf_after: "mini_check"
+    upsell_kit: "global_founder"
+    pdf_name: "global_payment_rails.pdf"
+
+# Kit configuration
+kits:
+  builders_standard:
+    slug: "builders"
+    start_param: "kit_builders_standard"
+    name: "Builder's Starter Kit"
+    tagline: "US Fintech Foundation"
+    persona: "builders"
+    price: 499
+    flow_type: "premium"
+    issuance: "earned_on_completion"
+    badge_color: "#22d3ee"
+    time_estimate_hours: [2, 3]
+    
+    modules:
+      - "business_foundation_setup"
+      - "payment_processing_readiness"  
+      - "legal_compliance_framework"
+      - "risk_management_systems"
+    
+    deliverables:
+      - "Multi-PSP Readiness Checklist (36 items)"
+      - "Wyoming LLC Formation Guide + Templates"
+      - "Policy Template Library (Terms, Privacy, AML)"
+      - "Payment Processor Application Pack"
+      - "PCI Compliance Roadmap"
+      - "Fraud Prevention Implementation Guide"
+      - "Chargeback Management Playbook"
+      - "Earned Compliance Passport (180-day validity)"
+    
+    addons_available: ["reviewed_passport", "application_pack"]
+    
+  global_founder:
+    slug: "global"
+    start_param: "kit_global_founder"
+    name: "Global Founder Kit"
+    tagline: "International Expansion"
+    persona: "global"
+    price: 499
+    flow_type: "premium"
+    issuance: "earned_on_completion"
+    badge_color: "#a855f7"
+    time_estimate_hours: [3, 4]
+    
+    modules:
+      - "international_banking_setup"
+      - "cross_border_compliance"
+      - "multi_currency_operations"
+      - "global_risk_management"
+    
+    deliverables:
+      - "International Banking Setup Guide"
+      - "Cross-Border Compliance Checklist (42 items)"
+      - "Multi-Jurisdiction Legal Framework"
+      - "FATCA/CRS Reporting Templates"
+      - "International AML Policy Templates"
+      - "Global Risk Assessment Matrix"
+      - "Currency Handling Best Practices"
+      - "Enhanced Earned Passport with Global Credentials"
+    
+    addons_available: ["reviewed_passport", "application_pack"]
+    
+  crypto_founder:
+    slug: "crypto"
+    start_param: "kit_crypto_founder"
+    name: "Crypto Founder's Kit"
+    tagline: "Web3 Compliance"
+    persona: "crypto"
+    price: 499
+    flow_type: "premium"
+    issuance: "earned_on_completion"
+    badge_color: "#10b981"
+    time_estimate_hours: [4, 5]
+    
+    modules:
+      - "token_compliance_framework"
+      - "regulatory_strategy"
+      - "marketing_compliance"
+      - "technical_implementation"
+    
+    deliverables:
+      - "Token Economics Compliance Analysis"
+      - "Multi-Jurisdiction Regulatory Strategy"
+      - "Compliant Marketing Message Bank"
+      - "DeFi Protocol Compliance Framework"
+      - "NFT Marketplace Requirement Guide"
+      - "Regulatory Sandbox Application Templates"
+      - "Technical Compliance Implementation Guide"
+      - "Specialized Crypto Compliance Passport"
+    
+    addons_available: ["reviewed_passport", "application_pack"]
+    
+  genius_snapshot:
+    slug: "genius"
+    start_param: "kit_genius_snapshot"
+    name: "GENIUS Act Readiness Snapshot"
+    tagline: "Assessment Service"
+    persona: "assessment"
+    price: 499
+    flow_type: "assessment"
+    issuance: "assessment_based"
+    badge_color: "#f59e0b"
+    time_estimate_hours: [1, 2]
+    
+    modules:
+      - "comprehensive_risk_assessment"
+      - "regulatory_gap_analysis"
+      - "action_plan_generation"
+      - "implementation_roadmap"
+    
+    deliverables:
+      - "10-Page Detailed Assessment Report"
+      - "Risk Heat Map Visualization"
+      - "12-Item Readiness Checklist"
+      - "Reserve Calculation Guidance"
+      - "Reporting Requirement Audit"
+      - "Implementation Timeline"
+      - "$499 Credit Toward Pro Report (30-day window)"
+      - "Assessment-Based Compliance Passport"
+    
+    addons_available: ["pro_report_upgrade"]
+    credit_toward_pro: 499
+    credit_expiry_days: 30
+
+# Data-Verified power-up configuration
+data_verified:
+  enabled: true
+  platforms:
+    shopify:
+      name: "Shopify"
+      required_fields: ["Order ID", "Financial Status", "Total", "Currency", "Created at", "Customer Email", "Risk Level"]
+      export_path: "Orders → Export → Export orders (CSV)"
+      sample_url: "https://merchantguard.ai/samples/shopify_orders_sample.csv"
+      video_url: "https://merchantguard.ai/videos/shopify_export_30sec.mp4"
+      
+    woocommerce:
+      name: "WooCommerce"
+      required_fields: ["Order ID", "Status", "Total", "Currency", "Date Created", "Customer Email", "Payment Method"]
+      export_path: "WooCommerce → Orders → Export (CSV Export plugin)"
+      sample_url: "https://merchantguard.ai/samples/woocommerce_orders_sample.csv"
+      video_url: "https://merchantguard.ai/videos/woocommerce_export_30sec.mp4"
+      
+    bigcommerce:
+      name: "BigCommerce"
+      required_fields: ["Order ID", "Status", "Total Value", "Currency Code", "Date Created", "Billing Email"]
+      export_path: "Orders → Export Orders → CSV"
+      sample_url: "https://merchantguard.ai/samples/bigcommerce_orders_sample.csv"
+      video_url: "https://merchantguard.ai/videos/bigcommerce_export_30sec.mp4"
+  
+  scoring:
+    base_boost: 5
+    volume_thresholds:
+      tier_1: {min_volume: 1000, boost: 2}
+      tier_2: {min_volume: 10000, boost: 5}
+      tier_3: {min_volume: 100000, boost: 8}
+    order_thresholds:
+      tier_1: {min_orders: 100, boost: 3}
+      tier_2: {min_orders: 500, boost: 5}
+      tier_3: {min_orders: 1000, boost: 7}
+    max_boost: 15
+
+# Feature flags / experiments
+experiments:
+  # Passport flow experiments
+  offer_data_verified_upgrade: true
+  data_verified_upsell_timing: "after_self_attested"  # or "during_mini_check"
+  reviewed_addon_timing: "kit_completion"  # or "immediate_upsell" or "post_purchase"
+  
+  # Pricing experiments  
+  dynamic_addon_pricing: false
+  volume_discount_enabled: false
+  early_bird_pricing: false
+  
+  # UX experiments
+  passport_portal_preview: true
+  mini_check_progress_bar: true
+  kit_completion_celebration: true
+  
+  # Marketing experiments
+  testimonial_rotation: true
+  urgency_messaging: false
+  social_proof_display: true
+  
+  # Payment experiments
+  telegram_stars_primary: true
+  stripe_fallback: true
+  payment_plan_option: false
+
+# Messaging configuration
+messaging:
+  hero:
+    variant_a: "Switch providers without starting over."
+    variant_b: "Your portable Compliance Passport travels with you."
+    
+  cta:
+    builders: "Issue my Compliance Passport"
+    global: "Start my Global Founder Kit" 
+    crypto: "Start my Crypto Kit"
+    assessment: "Get my GENIUS Snapshot"
+    
+  upsells:
+    data_verified: "Upgrade to Data-Verified in 2 minutes—stronger acceptance signals."
+    reviewed_addon: "Add human expert review (+$199) for highest trust level."
+    application_pack: "Get PSP-ready ZIP file (+$99) with all docs formatted."
+    
+  disclaimers:
+    passport: "Educational tooling & attestations; not legal advice or compliance certification."
+    independence: "MerchantGuard is not affiliated with any payment service provider."
+    assessment: "For informational purposes only. Not financial, legal, or investment advice."
+
+# Analytics configuration  
+analytics:
+  enabled: true
+  backend: "mixpanel"  # or "amplitude", "posthog", "custom"
+  track_ltv: true
+  track_conversion_funnels: true
+  track_persona_performance: true
+  
+  core_events:
+    - "funnel_entry"
+    - "passport_issued"  
+    - "kit_purchased"
+    - "addon_purchased"
+    - "data_verified_upgrade"
+    - "passport_renewed"
+    
+  conversion_funnels:
+    builders_freemium: ["funnel_entry", "mini_check_completed", "passport_self_attested", "kit_purchased"]
+    global_premium: ["kit_viewed", "kit_purchased", "kit_completed", "reviewed_addon_purchased"]
+    crypto_premium: ["kit_viewed", "kit_purchased", "kit_completed", "reviewed_addon_purchased"]
+
+# Legal & compliance settings
+legal:
+  disclaimers_required: true
+  gdpr_compliance: true
+  data_retention_days: 1095  # 3 years
+  pii_encryption: true
+  audit_logging: true
+  
+  passport_disclaimers:
+    - "Educational purposes only"
+    - "Not compliance certification"
+    - "Independence from PSPs"
+    - "180-day validity period"
+
+# PSP pilot configuration (enterprise features)
+psp_pilots:
+  enabled: true
+  pilot_types: ["vamp_prevention", "underwriting_acceleration", "merchant_scoring"]
+  default_contract_length_months: 6
+  revenue_sharing_model: "performance_based"
+  
+  vamp_prevention:
+    early_warning_threshold: 0.65  # Dispute ratio %
+    monitoring_frequency_hours: 24
+    alert_methods: ["email", "slack", "webhook"]
+
+# Rate limiting & security
+security:
+  rate_limits:
+    passport_generation_per_user_per_day: 3
+    csv_upload_per_user_per_day: 5  
+    kit_purchase_attempts_per_user_per_hour: 10
+    
+  file_upload:
+    max_file_size_mb: 50
+    allowed_extensions: [".csv"]
+    virus_scanning: true
+    
+  encryption:
+    passport_signing_algorithm: "HMAC-SHA256"
+    csv_storage_encryption: "AES-256"
+    key_rotation_days: 90
+
+# Localization
+localization:
+  supported_languages: ["en", "es", "pt"]
+  default_language: "en"
+  auto_detect: true
+  
+  disclaimer_translations:
+    en: "For informational purposes only. Not financial, legal, or investment advice."
+    es: "Solo para fines informativos. No es asesoramiento financiero, legal o de inversión."
+    pt: "Apenas para fins informativos. Não é aconselhamento financeiro, jurídico ou de investimento."
+
+# Environment-specific overrides
+environments:
+  development:
+    debug_mode: true
+    mock_payments: true
+    shortened_passport_validity: 30  # days
+    
+  staging: 
+    debug_mode: false
+    mock_payments: true
+    load_testing: true
+    
+  production:
+    debug_mode: false
+    mock_payments: false
+    performance_monitoring: true
+    error_tracking: true

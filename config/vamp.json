@@ -1,0 +1,41 @@
+{
+  "version": "2025-08-22",
+  "timeline": {
+    "enforcement_start": "2025-10-01",
+    "acquirer_additional_penalty_start": "2026-01-01",
+    "global_drop_to_1p5_date": "2026-04-01"
+  },
+  "thresholds": {
+    "default_ratio_until_global_drop": 0.022,
+    "lac_ratio_oct2025_onward": 0.015,
+    "cemea_ratio_persistent": 0.022,
+    "current_threshold_note": "Change this to update the entire stack instantly"
+  },
+  "eligibility": {
+    "merchant_entry_rule": "3_consecutive_months_over_threshold",
+    "min_disputes_per_month_default": 1500,
+    "cemea_min_disputes_per_month": 150,
+    "cemea_min_dispute_value_usd": 75000
+  },
+  "penalties": {
+    "merchant_excessive_usd_per_dispute": 8,
+    "acquirer_above_standard_usd_per_dispute_jan2026": 4,
+    "acquirer_excessive_usd_per_dispute_oct2025": 8,
+    "notes": [
+      "Merchant penalties begin once 3-month rule is met.",
+      "If a merchant is already 3 months over by Oct 1, penalties begin in October.",
+      "If first month over is October, penalties begin in January if still over."
+    ]
+  },
+  "exemptions": {
+    "domestic_exempt_countries": ["BR", "CL", "IN"],
+    "domestic_exempt_notes": "Domestic transactions in Brazil, Chile, India are outside VAMP until local programs are announced; cross-border remains in-scope."
+  },
+  "region_overrides": {
+    "US": { "ratio_until_2026_04_01": 0.022, "ratio_from_2026_04_01": 0.015 },
+    "EU": { "ratio_until_2026_04_01": 0.022, "ratio_from_2026_04_01": 0.015 },
+    "AP": { "ratio_until_2026_04_01": 0.022, "ratio_from_2026_04_01": 0.015 },
+    "LAC": { "ratio": 0.015 },
+    "CEMEA": { "ratio": 0.022, "min_disputes": 150, "min_dispute_value_usd": 75000 }
+  }
+}

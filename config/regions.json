@@ -1,0 +1,65 @@
+{
+  "regions": {
+    "US": {
+      "band_today": 0.022,
+      "band_from": "2026-04-01", 
+      "band_future": 0.015,
+      "floor_cases": 1500,
+      "currency": "USD"
+    },
+    "EU": {
+      "band_today": 0.022,
+      "band_from": "2026-04-01",
+      "band_future": 0.015, 
+      "floor_cases": 1500,
+      "currency": "EUR"
+    },
+    "AP": {
+      "band_today": 0.022,
+      "band_from": "2026-04-01",
+      "band_future": 0.015,
+      "floor_cases": 1500,
+      "currency": "USD"
+    },
+    "CA": {
+      "band_today": 0.022,
+      "band_from": "2026-04-01", 
+      "band_future": 0.015,
+      "floor_cases": 1500,
+      "currency": "CAD"
+    },
+    "LAC": {
+      "band_today": 0.015,
+      "band_future": 0.015,
+      "floor_cases": 1500,
+      "currency": "USD"
+    },
+    "CEMEA": {
+      "band_today": 0.022,
+      "band_future": 0.022,
+      "floor_cases": 150,
+      "floor_value_usd": 75000,
+      "currency": "USD"
+    }
+  },
+  "domestic_exemptions": ["BR", "CL", "IN"],
+  "verified_penalties": {
+    "merchant_excessive": {
+      "amount_usd": 8,
+      "start": "2025-10-01"
+    },
+    "acquirer_excessive": {
+      "amount_usd": 8, 
+      "start": "2025-10-01"
+    },
+    "acquirer_above_standard": {
+      "amount_usd": 4,
+      "start": "2026-01-01"
+    }
+  },
+  "grace_period": {
+    "advisory_end": "2025-09-30",
+    "first_time_grace_months": 3
+  },
+  "industry_intel_psp_bands": [0.003, 0.005, 0.007, 0.009]
+}

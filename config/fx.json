@@ -1,0 +1,21 @@
+{
+  "base": "USD",
+  "last_updated_utc": "2025-08-22T00:00:00Z",
+  "usd_penalty_per_dispute": 8,
+  "display_currencies": ["USD", "EUR", "GBP", "BRL", "CAD"],
+  "rates": {
+    "EUR": 0.9125,
+    "GBP": 0.7750,
+    "BRL": 5.50,
+    "CAD": 1.375
+  },
+  "localized_amounts": {
+    "USD": "$8.00",
+    "EUR": "€7.30",
+    "GBP": "£6.20",
+    "BRL": "R$44.00",
+    "CAD": "C$11.00"
+  },
+  "update_schedule": "monthly",
+  "source": "Bank rates as of 2025-08-22"
+}

@@ -1,0 +1,19 @@
+usdc_acceptance:
+  coinbase_commerce: 
+    fees: "1%"
+    settlement: "Instant"
+    ease: "5/5"
+    kyc: "Light"
+    notes: "Multi-chain; strong UX"
+  bitpay:             
+    fees: "1–2%"
+    settlement: "Next day"
+    ease: "4/5"
+    kyc: "Medium"
+    notes: "Good for physical goods"
+  stripe_crypto:      
+    fees: "1.5% + $0.30"
+    settlement: "2–3 days"
+    ease: "5/5"
+    kyc: "Existing Stripe KYC"
+    notes: "Card+crypto mix"

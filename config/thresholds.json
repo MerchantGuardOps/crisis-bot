@@ -1,0 +1,194 @@
+{
+  "merchant_thresholds": {
+    "regions": {
+      "US": {
+        "name": "United States",
+        "current_threshold": 2.2,
+        "future_threshold": 1.5,
+        "threshold_change_date": "2026-04-01",
+        "min_monthly_cases": 1500,
+        "enforcement_date": "2025-10-01",
+        "currency": "USD"
+      },
+      "CA": {
+        "name": "Canada", 
+        "current_threshold": 2.2,
+        "future_threshold": 1.5,
+        "threshold_change_date": "2026-04-01",
+        "min_monthly_cases": 1500,
+        "enforcement_date": "2025-10-01",
+        "currency": "CAD"
+      },
+      "EU": {
+        "name": "Europe",
+        "current_threshold": 2.2,
+        "future_threshold": 1.5,
+        "threshold_change_date": "2026-04-01", 
+        "min_monthly_cases": 1500,
+        "enforcement_date": "2025-10-01",
+        "currency": "EUR"
+      },
+      "AP": {
+        "name": "Asia-Pacific",
+        "current_threshold": 2.2,
+        "future_threshold": 1.5,
+        "threshold_change_date": "2026-04-01",
+        "min_monthly_cases": 1500,
+        "enforcement_date": "2025-10-01",
+        "currency": "USD"
+      },
+      "LAC": {
+        "name": "Latin America",
+        "current_threshold": 1.5,
+        "future_threshold": 1.5,
+        "threshold_change_date": null,
+        "min_monthly_cases": 1500,
+        "enforcement_date": "2025-10-01",
+        "currency": "USD"
+      },
+      "CEMEA": {
+        "name": "Central Europe, Middle East, Africa",
+        "current_threshold": 2.2,
+        "future_threshold": 2.2,
+        "threshold_change_date": null,
+        "min_monthly_cases": 150,
+        "min_monthly_value": 75000,
+        "enforcement_date": "2025-10-01",
+        "currency": "USD"
+      }
+    },
+    "domestic_exempt_countries": ["BR", "CL", "IN"],
+    "scope_note": "Brazil, Chile, and India domestic transactions are exempt until local programs are announced. Cross-border transactions remain in scope."
+  },
+  "acquirer_thresholds": {
+    "above_standard": {
+      "min_threshold": 0.5,
+      "max_threshold": 0.69,
+      "penalty_per_dispute": 4,
+      "enforcement_date": "2026-01-01"
+    },
+    "excessive": {
+      "min_threshold": 0.7,
+      "penalty_per_dispute": 8,
+      "enforcement_date": "2025-10-01"
+    }
+  },
+  "penalties": {
+    "merchant_excessive": {
+      "amount_usd": 8,
+      "currency": "USD",
+      "enforcement_date": "2025-10-01"
+    },
+    "acquirer_above_standard": {
+      "amount_usd": 4,
+      "currency": "USD", 
+      "enforcement_date": "2026-01-01"
+    },
+    "acquirer_excessive": {
+      "amount_usd": 8,
+      "currency": "USD",
+      "enforcement_date": "2025-10-01"
+    }
+  },
+  "three_month_rule": {
+    "enabled": true,
+    "description": "Merchants must be over threshold for 3 consecutive months before penalties apply",
+    "grace_period_months": 3,
+    "copy": {
+      "already_over": "If your account has been ≥3 consecutive months over the regional threshold, fines apply now: $8 per excess dispute (merchant Excessive).",
+      "first_breach": "If this is your first month over, you typically have 3 months to remediate before fines begin.",
+      "domestic_carveout": "Domestic transactions in your country are not yet under VAMP until a local program is announced. Cross-border transactions remain in scope."
+    }
+  },
+  "psp_internal_thresholds": {
+    "description": "Industry intelligence - PSPs terminate before Visa VAMP thresholds trigger",
+    "reality_check": "Merchants rarely reach 1.5-2.2% VAMP thresholds because PSPs cut them off first",
+    "levels": {
+      "monitoring": {
+        "threshold": 0.3,
+        "action": "Internal monitoring begins (invisible to merchant)",
+        "typical_response": "No merchant notification",
+        "color": "yellow"
+      },
+      "warning": {
+        "threshold": 0.5,
+        "action": "Warning letter, remediation plan required", 
+        "typical_response": "Account review, possible reserves",
+        "color": "orange"
+      },
+      "critical": {
+        "threshold": 0.7,
+        "action": "Rolling reserves (5-15%), fee increases",
+        "typical_response": "Immediate reserve holds, rate hikes",
+        "color": "red"
+      },
+      "termination": {
+        "threshold": 0.9,
+        "action": "Account termination, MATCH list, 100% reserves",
+        "typical_response": "30-day notice, find new processor",
+        "color": "red"
+      }
+    },
+    "industry_tolerances": {
+      "high_risk_gaming": {
+        "max_tolerance": 1.2,
+        "note": "iGaming/crypto merchants may get up to 1.2% tolerance"
+      },
+      "cbd_digital": {
+        "max_tolerance": 0.9,
+        "note": "CBD, supplements, digital services typically cut at 0.9%"
+      },
+      "low_risk": {
+        "max_tolerance": 0.5,
+        "note": "Healthcare, education, Singapore entities held to <0.5%"
+      }
+    }
+  },
+  "currency_conversions": {
+    "usd_base": 8,
+    "approximate_rates": {
+      "BRL": {
+        "amount": 44,
+        "note": "Brazil Real - domestic transactions exempt until local program"
+      },
+      "EUR": {
+        "amount": 7.3,
+        "note": "Euro"
+      },
+      "GBP": {
+        "amount": 6.2,
+        "note": "British Pound"
+      },
+      "CAD": {
+        "amount": 11,
+        "note": "Canadian Dollar"
+      },
+      "CLP": {
+        "amount": 7800,
+        "note": "Chilean Peso - domestic transactions exempt until local program"
+      },
+      "INR": {
+        "amount": 670,
+        "note": "Indian Rupee - domestic transactions exempt until local program"
+      }
+    },
+    "disclaimer": "Exchange rates fluctuate. Penalties charged in USD globally."
+  },
+  "mastercard_ecm_comparison": {
+    "entry_threshold": 1.5,
+    "min_monthly_disputes": 100,
+    "penalty_structure": "escalating_fixed_fees",
+    "penalties": {
+      "month_1": 10000,
+      "month_2": 20000, 
+      "month_3": 40000,
+      "month_4": "mandated_termination"
+    },
+    "total_exposure": "70k-100k in 3 months",
+    "vs_vamp": "10x more expensive than VAMP for same violation period"
+  },
+  "rdr_ce3_note": "Some disputes can be removed from counts when resolved via RDR/CE3.0 programs",
+  "disclaimer": "Fines are in USD globally. Acquirers pay Visa and may pass costs to merchants per contract terms.",
+  "last_updated": "2025-08-22",
+  "version": "1.0"
+}

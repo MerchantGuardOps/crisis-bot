@@ -1,0 +1,72 @@
+{
+  "version": "2025-08-23",
+  "tiers": {
+    "quick_hit": {
+      "sku": "MG-QH-097",
+      "name": "Quick-Hit Kit",
+      "price": 97,
+      "currency": "USD",
+      "active": true,
+      "url": "/checkout?kit=quick-hit",
+      "badge": "NEW"
+    },
+    "psp_readiness": {
+      "sku": "MG-PR-199",
+      "name": "PSP Readiness",
+      "price": 199,
+      "currency": "USD",
+      "active": true,
+      "url": "/checkout?kit=psp-ready",
+      "badge": "POPULAR"
+    },
+    "builder_complete": {
+      "sku": "MG-BLD-499",
+      "name": "Builder's Complete",
+      "price": 499,
+      "currency": "USD",
+      "active": true,
+      "url": "/checkout?kit=builders"
+    },
+    "crypto_founder": {
+      "sku": "MG-CRY-499",
+      "name": "Crypto Founder's",
+      "price": 499,
+      "currency": "USD",
+      "active": true,
+      "url": "/checkout?kit=crypto",
+      "was_price": 997,
+      "campaign": {
+        "starts": "2025-08-23T00:00:00Z",
+        "ends": "2025-08-25T23:59:59Z",
+        "badge": "WAS $997!",
+        "priceValidUntil": "2025-08-25T23:59:59Z"
+      }
+    },
+    "vamp_protection": {
+      "sku": "MG-VAMP-499",
+      "name": "VAMP Protection",
+      "price": 499,
+      "currency": "USD",
+      "active": true,
+      "url": "/checkout?kit=vamp"
+    },
+    "high_risk": {
+      "sku": "MG-HR-499",
+      "name": "High-Risk Industries",
+      "price": 499,
+      "currency": "USD",
+      "active": true,
+      "url": "/checkout?kit=high-risk"
+    },
+    "bundle": {
+      "sku": "MG-BDL-1497",
+      "name": "Complete Bundle",
+      "price": 1497,
+      "currency": "USD",
+      "active": true,
+      "url": "/checkout?kit=bundle",
+      "includes": ["builder_complete", "crypto_founder", "vamp_protection", "high_risk"],
+      "savings": 499
+    }
+  }
+}

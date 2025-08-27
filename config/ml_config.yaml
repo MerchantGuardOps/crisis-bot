@@ -1,0 +1,198 @@
+version: "4.0"
+description: "ML Configuration for GuardScore per-market models"
+
+# Database configuration
+database:
+  url: "postgresql://user:pass@localhost:5432/guardscore"
+  connection_pool:
+    min_size: 2
+    max_size: 10
+    timeout: 30
+
+# Feature store configuration
+feature_store:
+  min_samples_per_market: 50
+  max_lookback_days: 90
+  confidence_threshold: 0.4
+  missing_value_strategy: "median_impute"
+  
+# Training configuration
+training:
+  test_size: 0.2
+  validation_splits: 3
+  early_stopping_rounds: 20
+  sample_weighting: "confidence_coverage"
+  
+# Model versioning
+models:
+  version: "v4.0"
+  champion_challenger:
+    enabled: true
+    evaluation_window_days: 30
+    promotion_threshold: 0.05  # PR-AUC improvement
+  
+# Market-specific model configurations
+market_models:
+  US_CARDS:
+    target: "labels_vamp_breach_30d"
+    threshold: 0.01  # 1% VAMP threshold
+    xgboost_params:
+      max_depth: 6
+      learning_rate: 0.1
+      n_estimators: 200
+      subsample: 0.8
+      colsample_bytree: 0.8
+      random_state: 42
+      eval_metric: "auc"
+    feature_engineering:
+      - "dispute_rate_trend_7d"
+      - "chargeback_velocity"
+      - "sop_completeness_score"
+    monotonic_constraints:
+      vamp_dispute_rate: 1  # Higher dispute rate → higher risk
+      ops_dispute_sop_level: -1  # Better SOP → lower risk
+  
+  BR_PIX:
+    target: "labels_pix_med_breach_30d"
+    threshold: 0.006  # 0.6% PIX MED threshold  
+    xgboost_params:
+      max_depth: 5
+      learning_rate: 0.1
+      n_estimators: 150
+      subsample: 0.8
+      colsample_bytree: 0.9
+      random_state: 42
+      eval_metric: "auc"
+    feature_engineering:
+      - "pix_dispute_trend_14d"
+      - "refund_velocity_pix"
+    monotonic_constraints:
+      pix_dispute_rate: 1
+  
+  EU_CARDS_SCA:
+    target: "labels_sca_auth_drop_30d" 
+    threshold: 0.92  # 92% auth rate minimum
+    xgboost_params:
+      max_depth: 4
+      learning_rate: 0.15
+      n_estimators: 100
+      subsample: 0.9
+      colsample_bytree: 0.8
+      random_state: 42
+      eval_metric: "auc"
+    feature_engineering:
+      - "auth_rate_trend_7d"
+      - "exemption_success_rate"
+    monotonic_constraints:
+      sca_auth_rate: -1  # Higher auth rate → lower risk
+
+# Vertical overlays (industry-specific adjustments)
+vertical_overlays:
+  CBD:
+    risk_multiplier: 1.3
+    additional_features:
+      - "compliance_program_maturity"
+      - "banking_relationship_stability"
+  
+  CRYPTO:
+    risk_multiplier: 1.4
+    additional_features:
+      - "token_economics_compliant"
+      - "aml_kyc_program_strength"
+  
+  GAMING:
+    risk_multiplier: 1.2
+    additional_features:
+      - "age_verification_strength"
+      - "responsible_gaming_measures"
+
+# Feature importance and explainability
+explainability:
+  shap:
+    enabled: true
+    sample_size: 500
+    output_format: ["summary_plot", "feature_importance", "force_plot"]
+  
+  top_features_count: 10
+  recommendation_mapping:
+    vamp_dispute_rate:
+      action: "Implement comprehensive dispute SOP"
+      estimated_gain: "+10-15 pts"
+      kit_recommendation: "builders_standard"
+    vamp_chargeback_rate:
+      action: "Enable 3-DS step-up for high-risk transactions"
+      estimated_gain: "+12-18 pts" 
+      kit_recommendation: "builders_standard"
+    ops_dispute_sop_level:
+      action: "Upgrade dispute documentation and response procedures"
+      estimated_gain: "+15 pts"
+      kit_recommendation: "builders_standard"
+    pix_dispute_rate:
+      action: "Strengthen PIX MED 2.0 compliance procedures"
+      estimated_gain: "+8-12 pts"
+      kit_recommendation: "global_founder"
+    sca_auth_rate:
+      action: "Optimize SCA exemption strategy and 3-DS flow"
+      estimated_gain: "+10-15 pts"
+      kit_recommendation: "global_founder"
+
+# Model serving configuration
+serving:
+  batch_size: 100
+  prediction_cache_ttl: 3600  # 1 hour
+  confidence_intervals: true
+  
+# Monitoring and alerts
+monitoring:
+  model_drift:
+    enabled: true
+    psi_threshold: 0.2
+    check_frequency_hours: 24
+  
+  performance_alerts:
+    auc_drop_threshold: 0.05
+    prediction_latency_ms: 100
+    
+# Output configuration
+output:
+  model_dir: "models/"
+  explanations_dir: "explanations/"
+  predictions_dir: "predictions/"
+  logs_dir: "logs/"
+  
+# Data quality checks
+data_quality:
+  null_threshold: 0.3  # Maximum % nulls per feature
+  outlier_detection:
+    method: "isolation_forest"
+    contamination: 0.1
+  
+  feature_correlation:
+    max_correlation: 0.95  # Remove highly correlated features
+  
+# Experiment tracking
+experiments:
+  mlflow:
+    enabled: false
+    tracking_uri: "http://localhost:5000"
+  
+  wandb:
+    enabled: false
+    project: "guardscore-ml"
+
+# Production deployment
+deployment:
+  model_format: "pickle"  # Options: pickle, onnx, joblib
+  versioning: "semantic"  # v4.0, v4.1, etc.
+  rollback_enabled: true
+  
+  serving_endpoints:
+    - name: "predict_vamp_breach"
+      path: "/api/ml/predict/vamp"
+      market: "US_CARDS"
+    - name: "predict_pix_breach" 
+      path: "/api/ml/predict/pix"
+      market: "BR_PIX"
+    - name: "predict_sca_drop"
+      path: "/api/ml/predict/sca"
+      market: "EU_CARDS_SCA"

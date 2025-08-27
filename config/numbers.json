@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "description": "Canonical numbers registry for MerchantGuard content",
+    "updated": "2025-08-21T00:00:00Z",
+    "version": "2025.1",
+    "usage": "Templates, Facts JSON, and components read from this single source to prevent drift",
+    "validation": "Numbers here must match Facts JSON exactly to prevent AI penalization"
+  },
+  
+  "vamp": {
+    "global_threshold_pct": 0.9,
+    "brazil_merchant_threshold_pct": 1.5,
+    "brazil_enforcement_date": "2025-10-01",
+    "penalty_low_usd": 4,
+    "penalty_high_usd": 8,
+    "penalty_enforcement_date": "2026-01-01",
+    "calculation_formula": "(TC40 Fraud + TC15 Disputes) / TC05 Settled Transactions"
+  },
+  
+  "dispute_rates": {
+    "industry_standard_pct": 1.0,
+    "low_risk_range": "0.1% - 0.5%",
+    "medium_risk_range": "0.5% - 1.2%", 
+    "high_risk_range": "1.5% - 3.0%",
+    "termination_threshold_pct": 2.0,
+    "chargeback_prevention_reduction_pct": "30-50%"
+  },
+  
+  "pix_med": {
+    "fraud_threshold_pct": 0.6,
+    "penalty_basis_points": 150,
+    "penalty_percentage": 1.5,
+    "response_time_minutes": 30,
+    "launch_date": "2024-Q4",
+    "system_version": "MED 2.0"
+  },
+  
+  "rolling_reserves": {
+    "low_risk_pct": "0-5%",
+    "medium_risk_pct": "5-10%",
+    "high_risk_pct": "10-20%",
+    "very_high_risk_pct": "15-25%",
+    "release_period_months": "6-18",
+    "high_risk_release_months": 18,
+    "standard_release_months": 12
+  },
+  
+  "early_termination_fees": {
+    "typical_range_usd": "$200-$500",
+    "flat_fee_range_usd": "$200-$500", 
+    "equipment_cost_usd": "$50-$200",
+    "high_risk_range_usd": "$400-$600",
+    "predatory_threshold_usd": 800
+  },
+  
+  "regional_multipliers": {
+    "brazil": {
+      "currency": "BRL",
+      "vamp_stricter_multiplier": 1.67,
+      "note": "1.5% vs 0.9% global = 1.67x stricter"
+    },
+    "united_states": {
+      "currency": "USD",
+      "base_market": true
+    },
+    "european_union": {
+      "currency": "EUR", 
+      "psd2_compliance": true
+    }
+  },
+  
+  "industry_benchmarks": {
+    "ecommerce_dispute_rate_pct": "0.5-1.2%",
+    "retail_dispute_rate_pct": "0.2-0.8%",
+    "adult_entertainment_dispute_rate_pct": "1.5-3.0%",
+    "cbd_dispute_rate_pct": "2.5%",
+    "average_ticket_cbd_usd": 75,
+    "processing_volume_loss_daily_usd": 15000
+  },
+  
+  "compliance_timeframes": {
+    "pci_compliance_levels": 4,
+    "kyc_verification_days": "1-5",
+    "high_risk_approval_days": "5-14",
+    "emergency_processing_hours": "24-48",
+    "recovery_success_rate_pct": 89,
+    "match_list_dispute_success_pct": 34
+  },
+  
+  "fee_structures": {
+    "high_risk_processing_pct": "3.5-8%",
+    "standard_processing_pct": "2.9-3.5%",
+    "per_transaction_fee_usd": "0.30",
+    "monthly_minimum_usd": "25-100",
+    "chargeback_fee_usd": "15-50"
+  }
+}

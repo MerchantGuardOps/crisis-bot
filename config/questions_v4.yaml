@@ -1,0 +1,220 @@
+version: "4.0"
+locales: ["en", "pt-BR"]
+notes: |
+  Immutable IDs. Never change an ID once shipped. Add new IDs with suffixes if needed.
+  Market-first routing: route by where the customer sells (markets_served), not where the founder is based.
+markets:
+  codes: ["US_CARDS", "BR_PIX", "EU_CARDS_SCA", "OTHER"]
+groups:
+  - code: "MARKET"
+    required: true
+    items:
+      - id: "MKT_1"
+        type: "multiselect"
+        prompt:
+          en: "Where are your customers? (pick all that apply)"
+          pt-BR: "Onde estão seus clientes? (escolha todas as opções)"
+        options:
+          - { value: "US_CARDS", label: { en: "US Cards", pt-BR: "Cartões (EUA)" } }
+          - { value: "BR_PIX", label: { en: "Brazil PIX", pt-BR: "PIX (Brasil)" } }
+          - { value: "EU_CARDS_SCA", label: { en: "EU Cards (SCA)", pt-BR: "Cartões UE (SCA)" } }
+          - { value: "OTHER", label: { en: "Other", pt-BR: "Outro" } }
+        map_to: "markets_served.selected"
+        analytics_key: "market.selected"
+      - id: "MKT_2"
+        type: "percent_split"
+        depends_on: "MKT_1"
+        prompt:
+          en: "Approximate % of your GMV by each market (must total ~100%)"
+          pt-BR: "% aproximado do seu GMV por mercado (deve somar ~100%)"
+        map_to: "markets_served.shares"
+        analytics_key: "market.shares"
+  - code: "BUSINESS_PROFILE"
+    required: true
+    items:
+      - id: "BP_1"
+        type: "select"
+        prompt:
+          en: "What best describes your business?"
+          pt-BR: "O que melhor descreve seu negócio?"
+        options:
+          - { value: "ECOM", label: { en: "E‑commerce (physical goods)", pt-BR: "E‑commerce (produtos físicos)" } }
+          - { value: "SAAS", label: { en: "SaaS / Subscriptions", pt-BR: "SaaS / Assinaturas" } }
+          - { value: "CBD", label: { en: "CBD / High‑risk vertical", pt-BR: "CBD / Vertical de alto risco" } }
+          - { value: "CRYPTO", label: { en: "Crypto / Web3 / Gaming", pt-BR: "Cripto / Web3 / Jogos" } }
+          - { value: "OTHER", label: { en: "Other", pt-BR: "Outro" } }
+        map_to: "profile.industry"
+        analytics_key: "profile.industry"
+      - id: "BP_2"
+        type: "select"
+        prompt:
+          en: "What stage are you at?"
+          pt-BR: "Em que estágio você está?"
+        options:
+          - { value: "EARLY", label: { en: "Early (0–6 mo)", pt-BR: "Inicial (0–6 meses)" } }
+          - { value: "GROWTH", label: { en: "Growth", pt-BR: "Crescimento" } }
+          - { value: "MATURE", label: { en: "Mature", pt-BR: "Maduro" } }
+        map_to: "profile.stage"
+        analytics_key: "profile.stage"
+      - id: "BP_3"
+        type: "boolean"
+        prompt:
+          en: "Have you ever had an account frozen or terminated by a provider?"
+          pt-BR: "Você já teve uma conta congelada ou encerrada por um provedor?"
+        map_to: "risk.prior_suspensions"
+        analytics_key: "risk.prior_suspensions"
+      - id: "BP_4"
+        type: "multiselect"
+        prompt:
+          en: "Which policies are live on your site? (links in footer)"
+          pt-BR: "Quais políticas estão publicadas no seu site? (links no rodapé)"
+        options:
+          - { value: "terms", label: { en: "Terms of Service", pt-BR: "Termos de Uso" } }
+          - { value: "privacy", label: { en: "Privacy Policy", pt-BR: "Política de Privacidade" } }
+          - { value: "refund", label: { en: "Refund/Return Policy", pt-BR: "Política de Reembolso/Devolução" } }
+          - { value: "shipping", label: { en: "Shipping/Delivery Policy", pt-BR: "Política de Envio/Entrega" } }
+        map_to: "ops.policies"
+        analytics_key: "ops.policies"
+      - id: "BP_5"
+        type: "select"
+        prompt:
+          en: "What platform powers your store or checkout?"
+          pt-BR: "Qual plataforma você usa para loja ou checkout?"
+        options:
+          - { value: "Shopify", label: { en: "Shopify", pt-BR: "Shopify" } }
+          - { value: "WooCommerce", label: { en: "WooCommerce", pt-BR: "WooCommerce" } }
+          - { value: "Custom", label: { en: "Custom / Other", pt-BR: "Personalizado / Outro" } }
+        map_to: "platform.primary"
+        analytics_key: "platform.primary"
+      - id: "BP_6"
+        type: "boolean"
+        prompt:
+          en: "Do you plan to add or switch providers in the next 90 days?"
+          pt-BR: "Você pretende adicionar ou trocar de provedor nos próximos 90 dias?"
+        map_to: "ops.multi_psp_intent"
+        analytics_key: "ops.multi_psp_intent"
+      - id: "BP_7"
+        type: "select"
+        prompt:
+          en: "Do you have a 3‑D Secure / step‑up plan for risky transactions?"
+          pt-BR: "Você possui um plano de 3‑D Secure / step‑up para transações de risco?"
+        options:
+          - { value: "YES", label: { en: "Yes", pt-BR: "Sim" } }
+          - { value: "NO", label: { en: "No", pt-BR: "Não" } }
+          - { value: "PLANNED", label: { en: "Planned", pt-BR: "Planejado" } }
+        map_to: "ops.stepup_3ds_plan"
+        analytics_key: "ops.stepup_3ds_plan"
+  - code: "VAMP_US"
+    required_for_markets: ["US_CARDS"]
+    items:
+      - id: "VAMP_1"
+        type: "number"
+        unit: "ratio"
+        decimals: 4
+        prompt:
+          en: "What is your current monthly dispute ratio (disputes / sales)? e.g., 0.0065 = 0.65%"
+          pt-BR: "Qual é sua taxa mensal de disputas (disputas / vendas)? Ex.: 0,0065 = 0,65%"
+        map_to: "vamp.monthly_dispute_rate"
+        analytics_key: "vamp.dispute_rate"
+      - id: "VAMP_2"
+        type: "number"
+        unit: "ratio"
+        decimals: 4
+        prompt:
+          en: "What is your current chargeback rate? e.g., 0.009 = 0.9%"
+          pt-BR: "Qual é sua taxa de chargeback? Ex.: 0,009 = 0,9%"
+        map_to: "vamp.chargeback_rate"
+        analytics_key: "vamp.chargeback_rate"
+      - id: "VAMP_3"
+        type: "select"
+        prompt:
+          en: "Do you have a documented dispute management SOP?"
+          pt-BR: "Você possui um POP (SOP) documentado para gestão de disputas?"
+        options:
+          - { value: "Comprehensive", label: { en: "Comprehensive (templates + SLAs + evidence pack)", pt-BR: "Abrangente (modelos + SLAs + evidências)" } }
+          - { value: "Strong", label: { en: "Strong (procedures + owners)", pt-BR: "Forte (procedimentos + responsáveis)" } }
+          - { value: "Basic", label: { en: "Basic (ad‑hoc)", pt-BR: "Básico (ad‑hoc)" } }
+          - { value: "None", label: { en: "None", pt-BR: "Nenhum" } }
+        map_to: "ops.dispute_sop_level"
+        analytics_key: "ops.dispute_sop_level"
+      - id: "VAMP_4"
+        type: "select"
+        prompt:
+          en: "How experienced are you with compliance & processor reviews?"
+          pt-BR: "Qual seu nível de experiência com compliance e revisões de provedores?"
+        options:
+          - { value: "Expert", label: { en: "Expert", pt-BR: "Especialista" } }
+          - { value: "Intermediate", label: { en: "Intermediate", pt-BR: "Intermediário" } }
+          - { value: "First-time", label: { en: "First‑time", pt-BR: "Primeira vez" } }
+        map_to: "profile.compliance_experience"
+        analytics_key: "profile.compliance_experience"
+  - code: "PIX_BR"
+    required_for_markets: ["BR_PIX"]
+    items:
+      - id: "PIX_1"
+        type: "number"
+        unit: "ratio"
+        decimals: 4
+        prompt:
+          en: "Your current PIX dispute ratio (disputes / PIX payments)? e.g., 0.0045 = 0.45%"
+          pt-BR: "Sua taxa atual de disputas no PIX (disputas / pagamentos PIX)? Ex.: 0,0045 = 0,45%"
+        map_to: "pix.dispute_rate"
+        analytics_key: "pix.dispute_rate"
+      - id: "PIX_3"
+        type: "boolean"
+        prompt:
+          en: "Do you follow a PIX MED 2.0 dispute SOP (documentation + timelines)?"
+          pt-BR: "Você segue um POP de disputas PIX MED 2.0 (documentação + prazos)?"
+        map_to: "pix.sop_present"
+        analytics_key: "pix.sop_present"
+  - code: "EU_SCA"
+    required_for_markets: ["EU_CARDS_SCA"]
+    items:
+      - id: "EU_1"
+        type: "multiselect"
+        prompt:
+          en: "Which SCA strategies do you use?"
+          pt-BR: "Quais estratégias de SCA você utiliza?"
+        options:
+          - { value: "EXEMPTIONS", label: { en: "Exemptions (TRA/low‑value/whitelisting)", pt-BR: "Isenções (TRA/baixo valor/whitelist)" } }
+          - { value: "STEP_UP", label: { en: "Step‑up 3DS when risky", pt-BR: "3DS step‑up quando arriscado" } }
+          - { value: "FRICTIONLESS", label: { en: "Frictionless 3DS for safe cohorts", pt-BR: "3DS sem fricção para coortes seguras" } }
+        map_to: "eu.sca_strategy"
+        analytics_key: "eu.sca_strategy"
+      - id: "EU_2"
+        type: "number"
+        unit: "ratio"
+        decimals: 2
+        prompt:
+          en: "Approx. authorization success rate on EU cards? (e.g., 0.93 = 93%)"
+          pt-BR: "Taxa aproximada de autorização em cartões UE? (ex.: 0,93 = 93%)"
+        map_to: "eu.auth_rate_estimate"
+        analytics_key: "eu.auth_rate_estimate"
+  - code: "POWER_UP"
+    items:
+      - id: "PU_1"
+        type: "powerup"
+        applies_when:
+          any_of:
+            - { path: "platform.primary", equals: "Shopify" }
+            - { path: "platform.primary", equals: "WooCommerce" }
+        prompt:
+          en: "Upload your orders CSV for a Data‑Verified Passport (higher acceptance, market‑specific signals)."
+          pt-BR: "Envie seu CSV de pedidos para um Passaporte Verificado por Dados (maior aceitação, sinais por mercado)."
+        analytics_key: "powerup.offered"
+scoring_map:
+  confidence_weights:
+    base_self_attested: 0.30
+    vamp_known_rate: 0.20
+    chargeback_known_rate: 0.20
+    shopify_csv_uploaded: 0.30
+    sop_comprehensive: 0.10
+  thresholds:
+    us_cards:
+      vamp_warn: 0.0065
+      vamp_threshold: 0.0100
+    br_pix:
+      med_warn: 0.0045
+      med_threshold: 0.0060
+    eu_cards_sca:
+      auth_min: 0.92

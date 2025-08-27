@@ -1,0 +1,56 @@
+{
+  "disclosure_required": true,
+  "disclosure_copy": "We may receive compensation from providers selected by our algorithm. We remain independent and provider-neutral.",
+  "rotation": {
+    "algo": "score_weighted",
+    "min_share_pct": 0.1
+  },
+  "payout_rules": {
+    "default_cookie_days": 90,
+    "default_attribution": "first_touch_server_side",
+    "fallback": "unique_referral_code"
+  },
+  "providers_overrides": {
+    "durango": {
+      "active": true,
+      "traffic_cap_daily": 500,
+      "referral_url": "https://durangomerchantservices.com/apply?ref=merchantguard",
+      "payout_model": "rev_share",
+      "commission_rate": 0.15
+    },
+    "first_card": {
+      "active": true,
+      "traffic_cap_daily": 300,
+      "referral_url": "https://firstcardpayments.com/apply?partner=mg",
+      "payout_model": "flat_fee",
+      "commission_amount": 750
+    },
+    "easy_pay": {
+      "active": true,
+      "traffic_cap_daily": 200,
+      "referral_url": "https://easypayprocessing.com/merchant-application?src=merchantguard",
+      "payout_model": "hybrid",
+      "commission_amount": 500,
+      "commission_rate": 0.08
+    },
+    "payment_cloud": {
+      "active": true,
+      "traffic_cap_daily": 400,
+      "referral_url": "https://paymentcloudconnect.com/apply?affiliate=mg",
+      "payout_model": "rev_share",
+      "commission_rate": 0.12
+    }
+  },
+  "lead_qualification": {
+    "min_monthly_volume": 5000,
+    "max_dispute_rate": 0.025,
+    "required_fields": ["business_name", "monthly_volume", "dispute_rate", "industry", "website"],
+    "exclusions": ["adult", "cannabis", "firearms"]
+  },
+  "attribution_settings": {
+    "cookie_domain": ".merchantguard.ai",
+    "tracking_param": "mgref",
+    "postback_url": "/api/partner-postback",
+    "encryption_key": "partner_tracking_key_2025"
+  }
+}
