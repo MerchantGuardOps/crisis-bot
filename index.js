@@ -66,7 +66,7 @@ bot.start(async (ctx) => {
     
     try {
       await ctx.replyWithPhoto(
-        'https://merchantguard.ai/Hero-image-merchantguard-v2.jpg',
+        'https://www.merchantguard.ai/guardscore_hero.png',
         {
           caption: `🚨 **Payment Emergency Detected**\n\n` +
                   `**${guide.title}**\n\n` +
@@ -103,7 +103,7 @@ bot.start(async (ctx) => {
   // Main Welcome with Hero Image
   try {
     await ctx.replyWithPhoto(
-      'https://merchantguard.ai/Hero-image-merchantguard-v2.jpg',
+      'https://www.merchantguard.ai/guardscore_hero.png',
       {
         caption: '🛡️ **Welcome to MerchantGuard**\n\n' +
                 'We help founders issue a Compliance Passport so they can switch payment providers without starting over.\n\n' +
