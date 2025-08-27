@@ -1,7 +1,7 @@
 // MerchantGuard Complete Bot
 const { Telegraf, Markup } = require('telegraf');
 
-const BOT_TOKEN = process.env.BOT_TOKEN || '7928143141:AAGHheF2fyq_dHcVmz-VdqlS9H26Fs3maEo';
+const BOT_TOKEN = process.env.BOT_TOKEN || '7928143141:AAEpRffwimul2xcP9PHqR5gtmPVwH4OFVUQ';
 
 const GUIDES = {
   section43: {
